@@ -3,7 +3,7 @@ OOLALA
 
 This project implements a variety of applications that take advantage of drawing using a turtle.
 
-Names:
+Names: Andrew Demma, Nish Wangneo, David Lu
 
 
 ### Timeline
