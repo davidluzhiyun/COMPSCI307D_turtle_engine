@@ -21,8 +21,8 @@ public class Main extends Application {
    Timeline animation;
    BorderPane borderPane = new BorderPane();
 
-   int mainWidth=600;
-   int mainHeight=600;
+   int mainWidth=800;
+   int mainHeight=800;
 
 
 
@@ -36,9 +36,7 @@ public class Main extends Application {
     @Override
     public void start (Stage stage) throws IOException{
         mainStage = stage;
-        //splashScreen = placeSplash(); // needs to return a group and a scene and will take in a stage
-
-        mainStage.setScene(getMainScene());
+        mainStage.setScene(getSplashScreen());
         mainStage.setTitle("Turtle Time");
         mainStage.show();
         animation = new Timeline();
@@ -48,20 +46,37 @@ public class Main extends Application {
     }
 
   public Scene getSplashScreen(){
-    Text title = new Text("!");
+    Text title = new Text("OOLALA");
     title.setFont(new Font(60));
     title.setTextAlignment(TextAlignment.CENTER);
-    title.setX(85);
+    title.setX(285);
     title.setY(200);
     title.setFill(Color.RED);
-    Button playApp = new Button("play App");
-    playApp.setFont(new Font(20));
-    playApp.setTextAlignment(TextAlignment.CENTER);
-    playApp.setLayoutX(200);
-    playApp.setLayoutY(400);
-    playApp.setOnMouseClicked(e -> startApp());
 
-    Group titleScreen = new Group(title,playApp);
+    Button play1 = new Button("play App 1");
+    play1.setFont(new Font(20));
+    play1.setTextAlignment(TextAlignment.CENTER);
+    play1.setLayoutX(330);
+    play1.setLayoutY(400);
+    play1.setOnMouseClicked(e -> startApp());
+
+    Button play2 = new Button("play App 2");
+    play2.setFont(new Font(20));
+    play2.setTextAlignment(TextAlignment.CENTER);
+    play2.setLayoutX(330);
+    play2.setLayoutY(500);
+    play2.setOnMouseClicked(e -> startApp());
+
+    Button play3 = new Button("play App 3");
+    play3.setFont(new Font(20));
+    play3.setTextAlignment(TextAlignment.CENTER);
+    play3.setLayoutX(330);
+    play3.setLayoutY(600);
+    play3.setOnMouseClicked(e -> startApp());
+
+
+
+    Group titleScreen = new Group(title,play1,play2,play3);
     return new Scene(titleScreen, mainWidth, mainHeight,Color.BLACK);
     }
 
