@@ -4,6 +4,7 @@ package oolala;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -58,21 +59,21 @@ public class Main extends Application {
     play1.setTextAlignment(TextAlignment.CENTER);
     play1.setLayoutX(330);
     play1.setLayoutY(400);
-    play1.setOnMouseClicked(e -> startApp());
+    play1.setOnMouseClicked(e -> startApp1());
 
     Button play2 = new Button("play App 2");
     play2.setFont(new Font(20));
     play2.setTextAlignment(TextAlignment.CENTER);
     play2.setLayoutX(330);
     play2.setLayoutY(500);
-    play2.setOnMouseClicked(e -> startApp());
+    play2.setOnMouseClicked(e -> startApp2());
 
     Button play3 = new Button("play App 3");
     play3.setFont(new Font(20));
     play3.setTextAlignment(TextAlignment.CENTER);
     play3.setLayoutX(330);
     play3.setLayoutY(600);
-    play3.setOnMouseClicked(e -> startApp());
+    play3.setOnMouseClicked(e -> startApp3());
 
 
 
@@ -81,16 +82,22 @@ public class Main extends Application {
     }
 
 
-    public void startApp(){
+    public void startApp1(){
+      mainStage.setScene(getMainScene());
 
     }
+  public void startApp2(){
 
+  }
+  public void startApp3(){
+
+  }
 
     public Scene getMainScene(){
         Text test = new Text("Hello World");
         borderPane.setCenter(test);
-        Scene scene = new Scene(borderPane,mainWidth,mainHeight,Color.LIGHTBLUE);
-        return scene;
+        borderPane.setBackground(Background.fill(Color.LIGHTBLUE));
+      return new Scene(borderPane,mainWidth,mainHeight,Color.LIGHTBLUE);
     }
 
     private void repeat(){
