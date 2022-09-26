@@ -1,11 +1,14 @@
 package oolala;
 
 
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -52,45 +55,46 @@ public class Main extends Application {
     title.setX(285);
     title.setY(200);
     title.setFill(Color.RED);
+    ArrayList<Button> buttons = new ArrayList<Button>();
+    Group gButtons = new Group();
+    gButtons.getChildren().add(title);
+    for(int i =1;i<=3;i++){
+      Button play = new Button("play App "+i);
+      play.setFont(new Font(20));
+      play.setTextAlignment(TextAlignment.CENTER);
+      Font font = Font.font("Verdana", FontWeight.LIGHT, 25);
+      play.setFont(font);
+      play.setLayoutX(330);
+      play.setLayoutY(400+(100)*(i-1));
+      buttons.add(play);
+      gButtons.getChildren().add(play);
+    }
 
-    Button play1 = new Button("play App 1");
-    play1.setFont(new Font(20));
-    play1.setTextAlignment(TextAlignment.CENTER);
-    play1.setLayoutX(330);
-    play1.setLayoutY(400);
-    play1.setOnMouseClicked(e -> startApp());
-
-    Button play2 = new Button("play App 2");
-    play2.setFont(new Font(20));
-    play2.setTextAlignment(TextAlignment.CENTER);
-    play2.setLayoutX(330);
-    play2.setLayoutY(500);
-    play2.setOnMouseClicked(e -> startApp());
-
-    Button play3 = new Button("play App 3");
-    play3.setFont(new Font(20));
-    play3.setTextAlignment(TextAlignment.CENTER);
-    play3.setLayoutX(330);
-    play3.setLayoutY(600);
-    play3.setOnMouseClicked(e -> startApp());
+    buttons.get(0).setOnMouseClicked(e->startApp1());
+    buttons.get(1).setOnMouseClicked(e->startApp2());
+    buttons.get(2).setOnMouseClicked(e->startApp3());
 
 
-
-    Group titleScreen = new Group(title,play1,play2,play3);
-    return new Scene(titleScreen, mainWidth, mainHeight,Color.BLACK);
+    return new Scene(gButtons, mainWidth, mainHeight,Color.BLACK);
     }
 
 
-    public void startApp(){
+    public void startApp1(){
+      mainStage.setScene(getMainScene());
 
     }
+  public void startApp2(){
 
+  }
+  public void startApp3(){
+
+  }
 
     public Scene getMainScene(){
         Text test = new Text("Hello World");
         borderPane.setCenter(test);
-        Scene scene = new Scene(borderPane,mainWidth,mainHeight,Color.LIGHTBLUE);
-        return scene;
+        borderPane.setBackground(Background.fill(Color.LIGHTBLUE));
+      return new Scene(borderPane,mainWidth,mainHeight,Color.LIGHTBLUE);
     }
 
     private void repeat(){
