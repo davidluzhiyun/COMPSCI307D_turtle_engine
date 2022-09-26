@@ -28,7 +28,7 @@ public class TurtleView {
         turtle.setX(model.getX());
         turtle.setY(model.getY());
         boolean moved = (oldX != model.getX()) && (oldY != model.getY());
-        if(penDown && moved) {
+        if(model.getPenState() && moved) {
             lines.add(new Line(oldX, oldY, turtle.getX(), turtle.getY()));
         }
     }

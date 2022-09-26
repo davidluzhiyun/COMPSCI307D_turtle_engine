@@ -6,7 +6,7 @@ public class TurtleController {
     TurtleView view;
 
     public TurtleController(){
-        model = new TurtleModel();
+        model = new TurtleModel("first");
         view = new TurtleView(this);
     }
 }

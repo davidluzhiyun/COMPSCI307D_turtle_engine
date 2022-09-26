@@ -3,15 +3,19 @@ package oolala;
 public class TurtleModel {
 
     private static final int SIZE = 800;
+    private String name;
 
     private double x, y;
 
     private int angle = 0;
+    private boolean penDown = true;
+    private boolean show = true;
 
-    public TurtleModel(){
+    public TurtleModel(String myName){
         //set x and y to middle of Window
         x = SIZE/2;
         y = SIZE/2;
+        name = myName;
     }
 
 
@@ -37,5 +41,27 @@ public class TurtleModel {
     }
     public double getY(){
         return y;
+    }
+
+    public void penDown(){
+        penDown = true;
+    }
+    public void penUp(){
+        penDown = false;
+    }
+    public void show(){
+        show = true;
+    }
+    public void hide(){
+        show = false;
+    }
+    public void stamp(){
+
+    }
+    public boolean getPenState(){
+        return penDown;
+    }
+    public boolean isShow(){
+        return show;
     }
 }
