@@ -19,11 +19,11 @@ public class TurtleModel {
     }
 
 
-    private void rightTurn(int angleChange){
+    public void rightTurn(int angleChange){
         angle -= angleChange;
     }
 
-    private void leftTurn(int angleChange){
+    public void leftTurn(int angleChange){
         this.rightTurn(-1*angleChange);
     }
 
@@ -57,6 +57,10 @@ public class TurtleModel {
     }
     public void stamp(){
 
+    }
+    public void home(){
+        x = SIZE/2;
+        y = SIZE/2;
     }
     public boolean getPenState(){
         return penDown;

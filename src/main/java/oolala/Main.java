@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -96,7 +97,7 @@ public class Main extends Application {
 
   }
 
-    public Scene getMainScene(){
+  public Scene getMainScene(){
         TurtleController controller = new TurtleController();
         Scene logoScene = controller.makeScene(mainWidth, mainHeight);
         return logoScene;
