@@ -1,6 +1,8 @@
 package oolala;
 
+import javafx.scene.CacheHint;
 import javafx.scene.Group;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
@@ -35,6 +37,15 @@ public class TurtleView {
             lineGroup.getChildren().add(drawLine);
         }
     }
+
+    public  void changeContrast(double value){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setContrast(value);
+        turtle.setEffect(colorAdjust);
+        turtle.setCache(true);
+        turtle.setCacheHint(CacheHint.SPEED);
+    }
+
     public Group getGroup(){
         return totalGroup;
     }

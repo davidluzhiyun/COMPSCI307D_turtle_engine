@@ -27,12 +27,15 @@ public class TurtleController {
     public Scene makeScene(int width, int height){
         BorderPane root = new BorderPane();
         root.setCenter(makeTurtleDisplay());
-        HBox topBar = new HBox(8);
+        HBox topBar = new HBox(15);
 
         Text text = new Text("TurtleTime");
         text.setFont(new Font(20));
 
         Button button = new Button("Change Color");
+        button.setOnMouseClicked(e->view.changeContrast(-1.0));
+
+
         topBar.getChildren().addAll(text,button);
 
 
