@@ -27,6 +27,9 @@ public class FileHandler   {
 
 static String[] allCommands = {"fd","bk","lt","rt","pendown","penup","showt","hidet","home","stamp"};
 static String[] numCommands = {"fd","bk","lt","ft"};
+static String[] nonNumCommands ={"pendown","penup","showt","hidet","home","stamp"};
+
+
 
 
 
@@ -44,11 +47,21 @@ ArrayList<String> numCommands2 = (ArrayList<String>) Arrays.asList(numCommands);
       if(!allCommands2.contains(current)){
         try{
           Integer test = Integer.parseInt(current);
-          return numCommands2.contains(newFile[i-1]);
+           if(numCommands2.contains(newFile[i-1])){
+              //switch for all num commands
+          }
         }
         catch (NumberFormatException e){
           return false;
         }
+
+      }
+      else{
+
+
+        //switch for all normal commands
+
+
 
       }
 
@@ -65,23 +78,7 @@ public static String[] readFile() throws IOException{
   String file = Files.readString(Path.of("src/main/resources/test.txt"));
   String[] newFile = file.split("\\s+");
   verifyFile();
-  for(int i=0;i<newFile.length;i++){
-    String current = newFile[i];
-    try{
-      int number = Integer.parseInt(current);
-      String previous = newFile[i-1];
 
-    }
-    catch(NumberFormatException e){
-
-    }
-
-
-
-
-
-
-  }
 
 return newFile;
 }
