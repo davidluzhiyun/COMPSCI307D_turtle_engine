@@ -1,5 +1,25 @@
-bruh
-hello
-its a me mario
-its a me Lugi
-its a me me me
+# draw a dashed hexagon
+fd 100
+lt 72
+
+pu
+fd 100
+lt 72
+
+pd
+fd 100
+lt 72
+
+pu
+fd 100
+lt 72
+
+pd
+fd 100
+lt 72
+
+pu
+fd 100
+lt 72
+
+ht
