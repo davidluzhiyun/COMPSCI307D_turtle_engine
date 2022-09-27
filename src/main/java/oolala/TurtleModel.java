@@ -27,12 +27,12 @@ public class TurtleModel {
         this.rightTurn(-1*angleChange);
     }
 
-    private void forward(int distance){
+    public void forward(int distance){
         double radians = Math.toRadians(angle);
         x += ((double) distance) * Math.sin(radians);
-        y += ((double) distance) * Math.cos(radians);
+        y -= ((double) distance) * Math.cos(radians);
     }
-    private void backward(int distance){
+    public void backward(int distance){
         this.forward(-1*distance);
     }
 

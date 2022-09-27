@@ -91,10 +91,9 @@ public class Main extends Application {
   }
 
     public Scene getMainScene(){
-        Text test = new Text("Hello World");
-        borderPane.setCenter(test);
-        borderPane.setBackground(Background.fill(Color.LIGHTBLUE));
-      return new Scene(borderPane,mainWidth,mainHeight,Color.LIGHTBLUE);
+        TurtleController controller = new TurtleController();
+        Scene logoScene = controller.makeScene(mainWidth, mainHeight);
+        return logoScene;
     }
 
     private void repeat(){
