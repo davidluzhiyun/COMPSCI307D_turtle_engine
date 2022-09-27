@@ -32,6 +32,7 @@ public class CommandRunner {
    *  Store result in class variables
    */
   public void loadCommand(String command){
+    myError = null;
     myCommand = command.split("\\s+");
     tokenTypes = new int[myCommand.length];
     for (int i = 0; i < tokenTypes.length; i++){
@@ -44,7 +45,7 @@ public class CommandRunner {
    * return an error message for current index
    */
   public void throwUnknownToken(){
-    myError = "Don't know how to {}".formatted(myCommand[myIndex]);
+    myError = "Don't know how to \"%s\"".formatted(myCommand[myIndex]);
   }
 
   public void throwUnexpectedEnd(){
@@ -141,6 +142,9 @@ public class CommandRunner {
       for (TurtleModel turtle: currentTurtles){
         turtle.stamp();
       }
+    }
+    for (TurtleModel turtle : currentTurtles){
+      myController.update(turtle);
     }
     myIndex += 1;
   }

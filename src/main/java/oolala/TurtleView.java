@@ -32,6 +32,7 @@ public class TurtleView {
       Line drawLine = new Line(oldX + halfTurtleWidth, oldY + halfTurtleHeight, turtle.getX() + halfTurtleWidth, turtle.getY() + halfTurtleHeight);
       lineGroup.getChildren().add(drawLine);
     }
+    turtle.setRotate(90 - model.getAngle());
   }
   public Group getGroup(){
     return totalGroup;

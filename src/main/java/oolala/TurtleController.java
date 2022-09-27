@@ -77,6 +77,9 @@ public class TurtleController {
     if(commandView.getMyErrorMessage() != null){
       root.setTop(new Text(commandView.getMyErrorMessage()));
     }
+    else {
+      root.setTop(null);
+    }
   }
 
 }
