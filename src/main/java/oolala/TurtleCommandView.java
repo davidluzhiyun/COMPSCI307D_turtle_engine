@@ -33,6 +33,7 @@ public class TurtleCommandView {
   //Subject to change
   private TurtleCommandHistoryModel myModel;
   private CommandRunner myRunner;
+  private TurtleController myController;
   //Blank saved for some way to manage the turtles
   //There should be a list of all turtles and a list of current turtles
   //Or you can plug in seperated classes for managing turtles in the methods
@@ -41,10 +42,11 @@ public class TurtleCommandView {
    * Never intended to use alone
    * Always use the Hbox returned by makeInputPanel
    */
-  public TurtleCommandView(){
+  public TurtleCommandView(TurtleController controller){
     myErrorMessage = null;
     myModel = new TurtleCommandHistoryModel();
-    myRunner = new CommandRunner();
+    myController = controller;
+    myRunner = new CommandRunner(myController);
   }
 
   //methods we might need
@@ -57,6 +59,9 @@ public class TurtleCommandView {
   private void run (String command){
     myModel.record(command);
     myErrorMessage = myRunner.run(command);
+    if(myErrorMessage != null){
+      myController.showError();
+    }
   }
 
   private void clear (){
@@ -107,4 +112,7 @@ public class TurtleCommandView {
     return result;
   }
 
+  public String getMyErrorMessage() {
+    return myErrorMessage;
+  }
 }

@@ -10,19 +10,18 @@ import java.util.List;
 public class CommandRunner {
   public static String[] TYPE1_TOKENS = {"fd", "bk", "lt", "rt"};
   public static String[] TYPE2_TOKENS = {"pendown", "penup", "showt", "hidet", "home", "stamp"};
-  private Dictionary<String, TurtleModel> allTurtles;
   private List<TurtleModel> currentTurtles;
   private String[] myCommand;
   private int[] tokenTypes;
   private int myIndex;
   private String myError;
+  private TurtleController myController;
 
-  public CommandRunner(){
-    allTurtles =new Hashtable<String, TurtleModel>();
+  public CommandRunner(TurtleController controller){
+    myController = controller;
     currentTurtles = new ArrayList<>();
-    TurtleModel defaultTurtle = new TurtleModel("default");
-    allTurtles.put("default", defaultTurtle);
-    currentTurtles.add(defaultTurtle);
+    // inputs first turtle automatically
+    currentTurtles.add(myController.getInitialTurtle());
     myCommand = null;
     myIndex = 0;
     myError = null;
@@ -33,6 +32,7 @@ public class CommandRunner {
    *  Store result in class variables
    */
   public void loadCommand(String command){
+    myError = null;
     myCommand = command.split("\\s+");
     tokenTypes = new int[myCommand.length];
     for (int i = 0; i < tokenTypes.length; i++){
@@ -42,10 +42,10 @@ public class CommandRunner {
   }
 
   /**
-   * return a error message for current index
+   * return an error message for current index
    */
   public void throwUnknownToken(){
-    myError = "Don't know how to {}".formatted(myCommand[myIndex]);
+    myError = "Don't know how to \"%s\"".formatted(myCommand[myIndex]);
   }
 
   public void throwUnexpectedEnd(){
@@ -81,6 +81,9 @@ public class CommandRunner {
       for (TurtleModel turtle: currentTurtles){
         turtle.rightTurn(parameter);
       }
+    }
+    for (TurtleModel turtle : currentTurtles){
+      myController.update(turtle);
     }
     myIndex += 2;
   }
@@ -140,6 +143,9 @@ public class CommandRunner {
         turtle.stamp();
       }
     }
+    for (TurtleModel turtle : currentTurtles){
+      myController.update(turtle);
+    }
     myIndex += 1;
   }
 
@@ -153,13 +159,14 @@ public class CommandRunner {
     myIndex += 1;
     while ((myIndex < myCommand.length) && ((tokenTypes[myIndex] == 5) || (tokenTypes[myIndex] == 3))){
       String name = myCommand[myIndex];
-      if(((Hashtable)allTurtles).containsKey(name)){
-        currentTurtles.add(allTurtles.get(name));
+      if(((Hashtable)myController.getTurtleDictionary()).containsKey(name)){
+        currentTurtles.add((TurtleModel) myController.getTurtleDictionary().get(name));
       }
       else {
         TurtleModel newTurtle = new TurtleModel(name);
-        allTurtles.put(name,newTurtle);
+        myController.getTurtleDictionary().put(name,newTurtle);
         currentTurtles.add(newTurtle);
+        myController.createView(newTurtle);
       }
       myIndex += 1;
     }

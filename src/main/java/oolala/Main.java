@@ -21,32 +21,32 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class Main extends Application {
-   Stage mainStage;
-   Timeline animation;
-   BorderPane borderPane = new BorderPane();
+ Stage mainStage;
+ Timeline animation;
+ BorderPane borderPane = new BorderPane();
 
-   int mainWidth=800;
-   int mainHeight=800;
+ int mainWidth=800;
+ int mainHeight=800;
 
 
 
-    /**
-     * A method to test (and a joke :).
-     */
-    public double getVersion () {
-        return 0.001;
-    }
+  /**
+   * A method to test (and a joke :).
+   */
+  public double getVersion () {
+      return 0.001;
+  }
 
-    @Override
-    public void start (Stage stage) throws IOException{
-        mainStage = stage;
-        mainStage.setScene(getSplashScreen());
-        mainStage.setTitle("Turtle Time");
-        mainStage.show();
-        animation = new Timeline();
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(new KeyFrame(Duration.seconds((double) 1 / 60), e -> repeat()));
-        animation.play();
+  @Override
+  public void start (Stage stage) throws IOException{
+    mainStage = stage;
+    mainStage.setScene(getSplashScreen());
+    mainStage.setTitle("Turtle Time");
+    mainStage.show();
+    animation = new Timeline();
+    animation.setCycleCount(Timeline.INDEFINITE);
+    animation.getKeyFrames().add(new KeyFrame(Duration.seconds((double) 1 / 60), e -> repeat()));
+    animation.play();
     }
 
   public Scene getSplashScreen(){
@@ -80,14 +80,14 @@ public class Main extends Application {
     }
 
 
-    public void startApp1(){
-      mainStage.setScene(getMainScene());
-      try{
-        FileHandler.readFile();
-      }
-      catch (Exception e){
-        System.out.println("Oh crap"+e.getMessage());
-      }
+  public void startApp1(){
+    mainStage.setScene(getMainScene());
+    try{
+      FileHandler.readFile();
+    }
+    catch (Exception e){
+      // System.out.println("Oh crap: "+e.getMessage());
+    }
 
     }
   public void startApp2(){
@@ -98,15 +98,15 @@ public class Main extends Application {
   }
 
   public Scene getMainScene(){
-        TurtleController controller = new TurtleController();
-        Scene logoScene = controller.makeScene(mainWidth, mainHeight);
-        return logoScene;
+    TurtleController controller = new TurtleController();
+    Scene logoScene = controller.makeScene(mainWidth, mainHeight);
+    return logoScene;
     }
 
-    private void repeat(){
+  private void repeat(){
 
     }
-    public static void main (String[] args) {
+  public static void main (String[] args) {
         launch();
     }
 }
