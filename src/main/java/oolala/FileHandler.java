@@ -35,53 +35,45 @@ static String[] nonNumCommands ={"pendown","penup","showt","hidet","home","stamp
 
 
 
-  public static boolean verifyFile() throws IOException {
-
-ArrayList<String> allCommands2 = (ArrayList<String>) Arrays.asList(allCommands);
+  public static void readFile() throws IOException {
+ArrayList<String> nonNumCommands2 = (ArrayList<String>) Arrays.asList(nonNumCommands);
 ArrayList<String> numCommands2 = (ArrayList<String>) Arrays.asList(numCommands);
-
     String file = Files.readString(Path.of("src/main/resources/test.txt"));
     String[] newFile = file.split("\\s+");
-    for (int i = 0; i < newFile.length; i++) {
+    for (int i = 0; i < newFile.length-1; i++) {
       String current = newFile[i];
-      if(!allCommands2.contains(current)){
+      if(numCommands2.contains(current)){
         try{
-          Integer test = Integer.parseInt(current);
-           if(numCommands2.contains(newFile[i-1])){
-              //switch for all num commands
-          }
+              int test = Integer.parseInt(newFile[i+1]);
+              numCommandsSwitch(current,test);
         }
-        catch (NumberFormatException e){
-          return false;
+        catch(NumberFormatException e){
+            //Error Handling for BadFIle goes here
         }
-
       }
+      else if (nonNumCommands2.contains(current)){
+        nonNumCommandsSwitch(current);
+      }
+
       else{
-
-
-        //switch for all normal commands
-
-
-
+        //Error Handling for Bad File goes Here
       }
+
 
     }
 
 
-    return true;
   }
 
+public static void numCommandsSwitch(String x, int y){
 
-
-public static String[] readFile() throws IOException{
-
-  String file = Files.readString(Path.of("src/main/resources/test.txt"));
-  String[] newFile = file.split("\\s+");
-  verifyFile();
-
-
-return newFile;
 }
+
+public static void nonNumCommandsSwitch(String x){
+
+}
+
+
 
 
 }
