@@ -32,24 +32,35 @@ public class TurtleCommandView {
   private String myErrorMessage;
   //Subject to change
   private TurtleCommandHistoryModel myModel;
+  private CommandRunner myRunner;
   //Blank saved for some way to manage the turtles
   //There should be a list of all turtles and a list of current turtles
   //Or you can plug in seperated classes for managing turtles in the methods
 
+  /**
+   * Never intended to use alone
+   * Always use the Hbox returned by makeInputPanel
+   */
+  public TurtleCommandView(){
+    myErrorMessage = null;
+    myModel = new TurtleCommandHistoryModel();
+    myRunner = new CommandRunner();
+  }
 
   //methods we might need
   private void next (){
-
+    mySingleLineInput.setText(myModel.next());
   }
   private void back (){
-
+    mySingleLineInput.setText(myModel.back());
   }
   private void run (String command){
-    //run command, clear and update error message
+    myModel.record(command);
+    myErrorMessage = myRunner.run(command);
   }
 
   private void clear (){
-
+    mySingleLineInput.clear();
   }
 
 
