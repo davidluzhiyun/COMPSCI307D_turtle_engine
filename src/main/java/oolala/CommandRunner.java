@@ -64,12 +64,12 @@ public class CommandRunner {
     String action = (myCommand[myIndex]);
     if (action.equals("fd")){
       for (TurtleModel turtle: currentTurtles){
-        turtle.foward(parameter);
+        turtle.forward(parameter);
       }
     }
     if (action.equals("bk")){
       for (TurtleModel turtle: currentTurtles){
-        turtle.back(parameter);
+        turtle.backward(parameter);
       }
     }
     if (action.equals("lt")){
@@ -83,7 +83,6 @@ public class CommandRunner {
       }
     }
     myIndex += 2;
-    return;
   }
 
   /**
@@ -142,7 +141,6 @@ public class CommandRunner {
       }
     }
     myIndex += 1;
-    return;
   }
 
   /**
@@ -171,7 +169,7 @@ public class CommandRunner {
    */
   public String run(String command){
     loadCommand(command);
-    while ((myError.equals(null)) && (myIndex < myCommand.length)){
+    while ((myError == null) && (myIndex < myCommand.length)){
       if (tokenTypes[myIndex] == 1){
         runType1();
       }
