@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TurtleView {
   private ImageView turtle;
   public static final String TURTLE_IMAGE = "/images/turtle.png";
-  Group lineGroup, totalGroup;
+  Group lineGroup, totalGroup, turtleStamps;
   public TurtleView(){
     turtle = new ImageView(new Image(TURTLE_IMAGE));
     turtle.setX(800/2);
@@ -23,6 +23,13 @@ public class TurtleView {
   }
 
   public void update(TurtleModel model){
+    if(model.isShow()){
+      turtle.visibleProperty().set(true);
+    }
+    else{
+      turtle.visibleProperty().set(false);
+    }
+
     double oldX = turtle.getX();
     double oldY = turtle.getY();
     turtle.setX(model.getX());
@@ -36,12 +43,20 @@ public class TurtleView {
     }
     turtle.setRotate(90 - model.getAngle());
   }
+  public void stamp(TurtleModel model){
+    ImageView turtleStamp = new ImageView(new Image(TURTLE_IMAGE));
+    turtleStamp.setX(turtle.getX());
+    turtleStamp.setY(turtle.getY());
+    turtleStamp.setRotate(90 - model.getAngle());
+    turtleStamps.getChildren().add(turtleStamp);
+  }
   public Group getGroup(){
     return totalGroup;
   }
   private Group createGroup(){
     lineGroup = new Group();
-    totalGroup = new Group(turtle, lineGroup);
+    turtleStamps = new Group();
+    totalGroup = new Group(turtle, lineGroup, turtleStamps);
     return totalGroup;
   }
 }

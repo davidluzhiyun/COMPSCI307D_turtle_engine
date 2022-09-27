@@ -150,6 +150,7 @@ public class CommandRunner {
     if (action.equals("stamp")){
       for (TurtleModel turtle: currentTurtles){
         turtle.stamp();
+        myController.stamp(turtle);
       }
     }
     for (TurtleModel turtle : currentTurtles){
