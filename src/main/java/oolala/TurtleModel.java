@@ -73,12 +73,10 @@ public class TurtleModel {
   public void hide(){
     show = false;
   }
-  public void stamp(){
-
-  }
   public void home(){
     x = SIZE/2;
     y = SIZE/2;
+    angle = 90;
   }
   public boolean getPenState(){
     return penDown;

@@ -67,6 +67,11 @@ public class TurtleController {
     view.update(turtle);
     showError();
   }
+  public void stamp(TurtleModel turtle){
+    TurtleView view = allModels.get(turtle.getName());
+    view.stamp(turtle);
+    showError();
+  }
   public void createView(TurtleModel turtle){
     TurtleView newView = new TurtleView();
     allModels.put(turtle.getName(), newView);
