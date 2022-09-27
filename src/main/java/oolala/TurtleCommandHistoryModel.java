@@ -16,27 +16,22 @@ import java.util.List;
  *
  * @author David Lu
  */
-public class TurtleCommandModel {
-  List<Turtle> allTurtles;
-  List<Turtle> currentTurtles;
+public class TurtleCommandHistoryModel {
+
   private String myCurrentCommand;
   private int myCurrentIndex;
   private List<String> myHistory;
-  public TurtleCommandModel(){
+  public TurtleCommandHistoryModel(){
     myCurrentCommand = null;
     myCurrentIndex = -1;
     myHistory = new ArrayList<>();
-    allTurtles = new ArrayList<>();
-    currentTurtles = new ArrayList<>();
-    Turtle defaultTurtle = new Turtle("default");
-    allTurtles.add(defaultTurtle);
-    currentTurtles.add(defaultTurtle);
+
   }
   /**
    * From Robert C. Duvall
    * Returns true if there is a next URL available
    */
-  public boolean hasNext () {
+  private boolean hasNext () {
     return myCurrentIndex < (myHistory.size() - 1);
   }
 
@@ -44,7 +39,7 @@ public class TurtleCommandModel {
    * From Robert C. Duvall
    * Returns true if there is a previous URL available
    */
-  public boolean hasPrevious () {
+  private boolean hasPrevious () {
     return myCurrentIndex > 0;
   }
 
@@ -85,9 +80,9 @@ public class TurtleCommandModel {
   }
 
   /**
-   * Auxiliary method for recording the current command
+   * Method for recording the current command
    */
-  private void record(String command){
+  public void record(String command){
     if (command.equals("")){
       return;
     }
@@ -97,5 +92,6 @@ public class TurtleCommandModel {
       myCurrentIndex = myHistory.size() - 1;
     }
   }
+
 
 }

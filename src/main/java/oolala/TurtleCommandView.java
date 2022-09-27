@@ -22,18 +22,16 @@ import javafx.scene.layout.HBox;
  * @author David Lu
  */
 public class TurtleCommandView {
-
+  //Useful constants
   public static final int FIELD_WIDTH = 40;
   public static final String BUTTON_NAME_RUN = "Run";
   public static final String BUTTON_NAME_CLEAR = "Clear";
-
-  //Useful constants
 
   //Class variables
   private TextField mySingleLineInput;
   private String myErrorMessage;
   //Subject to change
-  private TurtleCommandModel myModel;
+  private TurtleCommandHistoryModel myModel;
   //Blank saved for some way to manage the turtles
   //There should be a list of all turtles and a list of current turtles
   //Or you can plug in seperated classes for managing turtles in the methods
@@ -56,7 +54,7 @@ public class TurtleCommandView {
 
 
   //Handles special keys for tracing history or running
-  public void handleKeyInput (KeyCode code) {
+  private void handleKeyInput (KeyCode code) {
     switch (code) {
       case UP -> back();
       case DOWN -> next();
