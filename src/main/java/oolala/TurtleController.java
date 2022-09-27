@@ -49,14 +49,14 @@ public class TurtleController {
         text.setFont(new Font(20));
 
         Button button = new Button("Change Color");
-        button.setOnMouseClicked(e->view.changeContrast(-1.0));
+        //button.setOnMouseClicked(e->view.changeContrast(-1.0));
 
 
         topBar.getChildren().addAll(text,button);
 
 
         root.setTop(topBar);
-        TurtleCommandView commandView = new TurtleCommandView();
+        TurtleCommandView commandView = new TurtleCommandView(this);
         HBox box = (HBox) commandView.makeInputPanel();
         root.setBottom(box);
 

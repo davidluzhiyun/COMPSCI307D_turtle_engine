@@ -85,7 +85,7 @@ public static void nonNumCommandsSwitch(String x){
 }
 
 public static void newReadFile(){
-    CommandRunner commandRunner = new CommandRunner();
+    CommandRunner commandRunner = new CommandRunner(null);
   BufferedReader reader;
   try {
     reader = new BufferedReader(new FileReader("src/main/resources/test.txt"));
