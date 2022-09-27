@@ -80,14 +80,14 @@ public class Main extends Application {
     }
 
 
-  public void startApp1(){
-    mainStage.setScene(getMainScene());
-    try{
-      FileHandler.readFile();
-    }
-    catch (Exception e){
-      // System.out.println("Oh crap: "+e.getMessage());
-    }
+    public void startApp1(){
+      mainStage.setScene(getMainScene());
+      try{
+        FileHandler.newReadFile();
+      }
+      catch (Exception e){
+        System.out.println("Oh crap"+e.getMessage());
+      }
 
     }
   public void startApp2(){
