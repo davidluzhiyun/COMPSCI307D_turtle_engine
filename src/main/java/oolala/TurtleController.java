@@ -41,7 +41,7 @@ public class TurtleController {
 
 
     public Scene makeScene(int width, int height){
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
         root.setCenter(makeTurtleDisplay());
         HBox topBar = new HBox(15);
 
@@ -56,8 +56,8 @@ public class TurtleController {
 
 
         root.setTop(topBar);
-        TurtleCommandView commandView = new TurtleCommandView(this);
-        HBox box = (HBox) commandView.makeInputPanel();
+        TurtleCommandView InputView = new TurtleCommandView(this);
+        HBox box = (HBox) InputView.makeInputPanel();
         root.setBottom(box);
 
     return new Scene(root, width, height);

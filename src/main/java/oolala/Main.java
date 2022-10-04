@@ -77,31 +77,37 @@ public class Main extends Application {
 
 
     return new Scene(gButtons, mainWidth, mainHeight,Color.BLACK);
+  }
+
+
+  public void startApp1(){
+    mainStage.setScene(getTurtleScene());
+    try{
+      FileHandler.newReadFile();
+    }
+    catch (Exception e){
+      System.out.println("Oh crap"+e.getMessage());
     }
 
-
-    public void startApp1(){
-      mainStage.setScene(getMainScene());
-      try{
-        FileHandler.newReadFile();
-      }
-      catch (Exception e){
-        System.out.println("Oh crap"+e.getMessage());
-      }
-
-    }
+  }
   public void startApp2(){
-
+    mainStage.setScene(getLScene());
   }
   public void startApp3(){
 
   }
 
-  public Scene getMainScene(){
+  public Scene getTurtleScene(){
     TurtleController controller = new TurtleController();
-    Scene logoScene = controller.makeScene(mainWidth, mainHeight);
-    return logoScene;
-    }
+    Scene turtleScene = controller.makeScene(mainWidth, mainHeight);
+    return turtleScene;
+  }
+
+  public Scene getLScene(){
+    LController controller = new LController();
+    Scene lScene = controller.makeScene(mainWidth, mainHeight);
+    return lScene;
+  }
 
   private void repeat(){
 
