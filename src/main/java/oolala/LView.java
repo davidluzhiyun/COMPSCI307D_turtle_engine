@@ -30,6 +30,7 @@ public class LView {
     cursor.setCenterY(model.getY());
     boolean moved = (oldX != model.getX()) || (oldY != model.getY());
     if(model.getPenState() && moved) {
+      System.out.println("Drawing Line");
       Line drawLine = new Line(oldX, oldY, cursor.getCenterX(), cursor.getCenterY());
       lineGroup.getChildren().add(drawLine);
     }

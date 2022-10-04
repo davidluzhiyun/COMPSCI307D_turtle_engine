@@ -16,7 +16,7 @@ public class LController {
   LModel model;
   LView view;
 
-  //LCommandView commandView;
+  LCommandView commandView;
   Group totalGroup;
 
   private BorderPane root;
@@ -29,7 +29,8 @@ public class LController {
     model = new LModel();
     view = new LView();
     colorList = Arrays.asList(Color.RED, Color.BLUEVIOLET, Color.LAWNGREEN, Color.GRAY, Color.AQUAMARINE);
-    //commandView = new LCommandView(this);
+    commandView = new LCommandView(this);
+
   }
 
 
@@ -52,8 +53,8 @@ public class LController {
     GridPane topGrid = new GridPane();
     topGrid.add(button, 5, 0);
     root.setTop(topGrid);
-    //HBox box = (HBox) LCommandView.makeInputPanel();
-    //root.setBottom(box);
+    HBox box = (HBox) commandView.makeInputPanel();
+    root.setBottom(box);
 
     return new Scene(root, width, height);
   }
@@ -70,4 +71,21 @@ public class LController {
     return view.getGroup();
   }
 
+  public LModel getModel () {
+    return model;
+  }
+
+  public void update(){
+    System.out.println("updating");
+    view.update(model);
+    showError();
+  }
+  public void showError(){
+    if(commandView.getMyErrorMessage() != null){
+      root.setTop(new Text(commandView.getMyErrorMessage()));
+    }
+    else {
+      root.setTop(null);
+    }
+  }
 }

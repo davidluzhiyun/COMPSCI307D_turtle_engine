@@ -2,11 +2,10 @@ package oolala;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Queue;
 
 public class LRunnerModel {
 
-  public static final int DEFAULT_DISTANCE = 10;
+  public static final int DEFAULT_DISTANCE = 2;
   public static final int DEFAULT_ANGLE = 60;
   private String[] myCommand;
   private int myIndex;
@@ -81,12 +80,12 @@ public class LRunnerModel {
 
   //Update turtle rules
   private void updateTurtleRules(){
-    myTurtleRules.put("F", " pendown fd " + randomizeParameter(myDistanceRange));
-    myTurtleRules.put("G", " penup fd " + randomizeParameter(myDistanceRange));
-    myTurtleRules.put("A", " penup bk " + randomizeParameter(myDistanceRange));
-    myTurtleRules.put("B", " pendown bk " + randomizeParameter(myDistanceRange));
-    myTurtleRules.put("+", " rt " + randomizeParameter(myAngleRange));
-    myTurtleRules.put("-", " lt " + randomizeParameter(myAngleRange));
+    myTurtleRules.put("f", "pendown fd " + randomizeParameter(myDistanceRange) + " ");
+    myTurtleRules.put("g", "penup fd " + randomizeParameter(myDistanceRange) + " ");
+    myTurtleRules.put("a", "penup bk " + randomizeParameter(myDistanceRange) + " ");
+    myTurtleRules.put("b", "pendown bk " + randomizeParameter(myDistanceRange) + " ");
+    myTurtleRules.put("+", "rt " + randomizeParameter(myAngleRange) + " ");
+    myTurtleRules.put("-", "lt " + randomizeParameter(myAngleRange) + " ");
   }
 
   //Generate random ints in String form according to range
