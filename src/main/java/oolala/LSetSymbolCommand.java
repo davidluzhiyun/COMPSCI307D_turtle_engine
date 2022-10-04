@@ -1,7 +1,7 @@
 package oolala;
 
-public class LRuleCommand extends LCommand{
-  public LRuleCommand(LRunnerModel model){
+public class LSetSymbolCommand extends LCommand{
+  public LSetSymbolCommand(LRunnerModel model) {
     super(model);
   }
 
@@ -10,10 +10,9 @@ public class LRuleCommand extends LCommand{
     try {
       LRunnerModel model = getMyModel();
       String symbol = model.getMyCommand()[model.getMyIndex() + 1];
-      String string = model.getMyCommand()[model.getMyIndex() + 2];
+      String logo = model.getMyCommand()[model.getMyIndex() + 2];
       assert symbol.length() == 1;
-      model.getMyRules().put(symbol,string);
-      model.setMyIndex(model.getMyIndex()+3);
+      model.getMyTurtleRules().put(symbol, " "+logo);
     }
     catch (IndexOutOfBoundsException e){
       throw new IndexOutOfBoundsException("Incomplete Command");
@@ -23,4 +22,3 @@ public class LRuleCommand extends LCommand{
     }
   }
 }
-
