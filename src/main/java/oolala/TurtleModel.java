@@ -20,13 +20,11 @@ public class TurtleModel {
 
 
   public void rightTurn(int angleChange){
-    if(angle - angleChange < 0){
-      angle += 360;
-      angle -= angleChange;
-    }
-    else{
     angle -= angleChange;
+    if(angle < 0){
+      angle += 360;
     }
+    angle %= 360;
   }
 
   public void leftTurn(int angleChange){
