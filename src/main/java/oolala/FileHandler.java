@@ -17,6 +17,8 @@ Once you do that, you can probably have the parsing follow a strict pattern for 
  */
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -66,14 +68,39 @@ ArrayList<String> numCommands2 = (ArrayList<String>) Arrays.asList(numCommands);
   }
 
 public static void numCommandsSwitch(String x, int y){
+    switch(x){
 
+
+
+    }
 }
 
 public static void nonNumCommandsSwitch(String x){
+  switch(x){
 
+  }
+
+
+
+}
+
+public static void newReadFile(){
+    CommandRunner commandRunner = new CommandRunner(null);
+  BufferedReader reader;
+  try {
+    reader = new BufferedReader(new FileReader("src/main/resources/test.txt"));
+    String line = reader.readLine();
+    while (line != null) {
+    commandRunner.loadCommand(line);
+    commandRunner.run(line);
+      line = reader.readLine();
+    }
+    reader.close();
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
 }
 
 
 
-
-}

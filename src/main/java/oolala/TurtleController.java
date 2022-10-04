@@ -40,12 +40,25 @@ public class TurtleController {
   }
 
 
-  public Scene makeScene(int width, int height){
-    root = new BorderPane();
-    totalGroup = makeTurtleDisplay();
-    root.setCenter(totalGroup);
-    HBox box = (HBox) commandView.makeInputPanel();
-    root.setBottom(box);
+    public Scene makeScene(int width, int height){
+        BorderPane root = new BorderPane();
+        root.setCenter(makeTurtleDisplay());
+        HBox topBar = new HBox(15);
+
+        Text text = new Text("TurtleTime");
+        text.setFont(new Font(20));
+
+        Button button = new Button("Change Color");
+        //button.setOnMouseClicked(e->view.changeContrast(-1.0));
+
+
+        topBar.getChildren().addAll(text,button);
+
+
+        root.setTop(topBar);
+        TurtleCommandView commandView = new TurtleCommandView(this);
+        HBox box = (HBox) commandView.makeInputPanel();
+        root.setBottom(box);
 
     return new Scene(root, width, height);
   }
