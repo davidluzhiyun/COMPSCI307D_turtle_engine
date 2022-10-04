@@ -49,7 +49,6 @@ public class LCommandView {
     if(myErrorMessage != null){
       myController.showError();
     }
-    System.out.println(turtleCode);
     myRunner.run(turtleCode);
   }
 

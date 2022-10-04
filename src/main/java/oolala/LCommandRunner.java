@@ -125,11 +125,9 @@ public class LCommandRunner {
     loadCommand(command);
     while ((myError == null) && (myIndex < myCommand.length)){
       if (tokenTypes[myIndex] == 1){
-        System.out.println("Run command type 1: "+ myCommand[myIndex]);
         runType1();
       }
       else if (tokenTypes[myIndex] == 2) {
-        System.out.println("Run command type 2: "+ myCommand[myIndex]);
         runType2();
       }
       else {

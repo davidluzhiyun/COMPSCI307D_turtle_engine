@@ -5,7 +5,7 @@ import java.util.Hashtable;
 
 public class LRunnerModel {
 
-  public static final int DEFAULT_DISTANCE = 2;
+  public static final int DEFAULT_DISTANCE = 5;
   public static final int DEFAULT_ANGLE = 60;
   private String[] myCommand;
   private int myIndex;

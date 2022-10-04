@@ -76,7 +76,6 @@ public class LController {
   }
 
   public void update(){
-    System.out.println("updating");
     view.update(model);
     showError();
   }
