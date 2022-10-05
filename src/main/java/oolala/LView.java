@@ -6,7 +6,7 @@ import javafx.scene.shape.Line;
 
 import static javafx.scene.paint.Color.BLACK;
 
-public class LView {
+public class LView extends View{
 
   private Circle cursor;
 
@@ -22,8 +22,8 @@ public class LView {
     createGroup();
   }
 
-
-  public void update(LModel model){
+  @Override
+  public void update(Model model) {
     double oldX = cursor.getCenterX();
     double oldY = cursor.getCenterY();
     cursor.setCenterX(model.getX());
@@ -35,9 +35,7 @@ public class LView {
     }
   }
 
-  public Group getGroup() {
-    return totalGroup;
-  }
+
   private Group createGroup() {
     lineGroup = new Group();
     totalGroup = new Group(cursor, lineGroup);
