@@ -19,21 +19,21 @@ import java.util.Hashtable;
 
 public class TurtleController {
 
-  TurtleModel model;
-  ArrayList<TurtleModel> turtleModels;
-  Dictionary<String, TurtleModel> allTurtles;
+  Model model;
+  ArrayList<Model> turtleModels;
+  Dictionary<String, Model> allTurtles;
   Dictionary<String, TurtleView> allModels;
   TurtleCommandView commandView;
   Group totalGroup;
   private BorderPane root;
 
   public TurtleController(){
-    model = new TurtleModel("first");
+    model = new Model("first");
     turtleModels = new ArrayList<>();
     turtleModels.add(model);
     TurtleView view = new TurtleView();
     commandView = new TurtleCommandView(this);
-    allTurtles = new Hashtable<String, TurtleModel>();
+    allTurtles = new Hashtable<String, Model>();
     allTurtles.put("first", turtleModels.get(0));
     allModels = new Hashtable<>();
     allModels.put("first", view);
@@ -67,7 +67,7 @@ public class TurtleController {
     Group turtleGroup = allModels.get("first").getGroup();
     return new Group(turtleGroup);
   }
-  public TurtleModel getInitialTurtle(){
+  public Model getInitialTurtle(){
     return turtleModels.get(0);
   }
 
@@ -75,17 +75,17 @@ public class TurtleController {
     return allTurtles;
   }
 
-  public void update(TurtleModel turtle){
+  public void update(Model turtle){
     TurtleView view = allModels.get(turtle.getName());
     view.update(turtle);
     showError();
   }
-  public void stamp(TurtleModel turtle){
+  public void stamp(Model turtle){
     TurtleView view = allModels.get(turtle.getName());
     view.stamp(turtle);
     showError();
   }
-  public void createView(TurtleModel turtle){
+  public void createView(Model turtle){
     TurtleView newView = new TurtleView();
     allModels.put(turtle.getName(), newView);
     totalGroup.getChildren().add(newView.getGroup());

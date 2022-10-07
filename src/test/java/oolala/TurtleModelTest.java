@@ -41,17 +41,6 @@ public class TurtleModelTest {
     assertEquals(turtle.getX(), SIZE/2 - 50);
   }
   @Test
-  public void verticalOutOfBounds(){
-    assertEquals(turtle.getX(), SIZE/2);
-    assertEquals(turtle.getY(), SIZE/2);
-    turtle.forward(1000);
-    assertEquals((int) turtle.getX(), SIZE/2);
-    assertEquals(turtle.getY(), 0);
-    turtle.backward(1000);
-    assertEquals((int) turtle.getX(), SIZE/2);
-    assertEquals(turtle.getY(), 700);
-  }
-  @Test
   public void backward(){
     assertEquals(SIZE/2, turtle.getX());
     assertEquals(SIZE/2, turtle.getY());
@@ -62,18 +51,6 @@ public class TurtleModelTest {
     turtle.backward(50);
     assertEquals(SIZE/2 + 50, turtle.getX());
     assertEquals(SIZE/2 + 50, turtle.getX());
-  }
-  @Test
-  public void horizontalOutOfBounds(){
-    assertEquals(turtle.getX(), SIZE/2);
-    assertEquals(turtle.getY(), SIZE/2);
-    turtle.rightTurn(90);
-    turtle.forward(1000);
-    assertEquals(turtle.getX(), 700);
-    assertEquals(turtle.getY(), SIZE/2);
-    turtle.backward(1000);
-    assertEquals(turtle.getX(), 0);
-    assertEquals(turtle.getY(), SIZE/2);
   }
   @Test
   public void penDownAndUp(){

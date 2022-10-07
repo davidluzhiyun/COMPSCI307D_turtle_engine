@@ -11,31 +11,4 @@ public class LModel extends Model{
     x = SIZE/2;
     y = SIZE/2;
   }
-
-  public double getX(){
-    return x;
-  }
-  public double getY(){
-    return y;
-  }
-
-  public void penDown(){
-    penDown = true;
-  }
-  public void penUp(){
-    penDown = false;
-  }
-  public void home(){
-    x = SIZE/2;
-    y = SIZE/2;
-    angle = 90;
-  }
-  public boolean getPenState(){
-    return penDown;
-  }
-
-  public int getAngle() {
-    return angle;
-  }
-
 }

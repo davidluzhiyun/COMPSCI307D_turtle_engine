@@ -1,17 +1,55 @@
 package oolala;
 
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Line;
 
-public abstract class View {
+public class View {
 
-  private Group totalGroup;
+  public final int SIZE = 800;
+
+  protected Group totalGroup, lineGroup, stamps;
+
+  protected ImageView cursor;
+
+  protected final String TURTLE_IMAGE = "/images/turtle.png";
 
   public View(){
+    cursor = new ImageView(new Image(TURTLE_IMAGE));
+    cursor.setX(800/2);
+    cursor.setY(800/2);
+    createGroup();
   }
 
-  public abstract void update(Model model);
+  public void update(Model model){
+    if(model.isShow()){
+      cursor.visibleProperty().set(true);
+    }
+    else{
+      cursor.visibleProperty().set(false);
+    }
+
+    double oldX = cursor.getX();
+    double oldY = cursor.getY();
+    cursor.setX(model.getX());
+    cursor.setY(model.getY());
+    boolean moved = (oldX != model.getX()) || (oldY != model.getY());
+    double halfTurtleWidth = cursor.getBoundsInLocal().getWidth() / 2;
+    double halfTurtleHeight = cursor.getBoundsInLocal().getHeight() / 2;
+    if(model.getPenState() && moved) {
+      Line drawLine = new Line(oldX + halfTurtleWidth, oldY + halfTurtleHeight, cursor.getX() + halfTurtleWidth, cursor.getY() + halfTurtleHeight);
+      lineGroup.getChildren().add(drawLine);
+    }
+    cursor.setRotate(90 - model.getAngle());
+  }
 
 
+  private void createGroup(){
+    lineGroup = new Group();
+    stamps = new Group();
+    totalGroup = new Group(cursor, lineGroup);
+  };
   public Group getGroup() {
     return totalGroup;
   }

@@ -2,21 +2,25 @@ package oolala;
 
 public class Model {
 
-  private final int SIZE = 800;
+  public final int SIZE = 800;
   private final int STRAIGHT_UP_ANGLE = 90;
 
   private String name;
-
   protected double x, y;
 
   private int angle;
-  private boolean penDown = true;
+  protected boolean pen = true;
+  protected boolean draw = true;
   private boolean show = true;
 
   public Model(){
+    this("default");
+  }
+  public Model(String myName){
     x = SIZE/2;
     y = SIZE/2;
     angle = STRAIGHT_UP_ANGLE;
+    name = myName;
   }
 
 
@@ -58,7 +62,32 @@ public class Model {
   }
 
   public boolean getPenState(){
-    return penDown;
+    return draw;
+  }
+
+  public void show(){
+    show = true;
+  }
+  public void hide(){
+    show = false;
+  }
+
+  public void penDown(){
+    draw = true;
+  }
+  public void penUp(){
+    draw = false;
+  }
+
+  public int getAngle(){
+    return angle;
+  }
+
+  public boolean isShow(){
+    return show;
+  }
+  public String getName(){
+    return name;
   }
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
 public class CommandRunner {
   public static String[] TYPE1_TOKENS = {"fd", "bk", "lt", "rt"};
   public static String[] TYPE2_TOKENS = {"pendown", "penup", "showt", "hidet", "home", "stamp"};
-  private List<TurtleModel> currentTurtles;
+  private List<Model> currentTurtles;
   private String[] myCommand;
   private int[] tokenTypes;
   private int myIndex;
@@ -72,26 +72,26 @@ public class CommandRunner {
     int parameter = Integer.parseInt(myCommand[myIndex+1]);
     String action = (myCommand[myIndex]);
     if (action.equals("fd")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.forward(parameter);
       }
     }
     if (action.equals("bk")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.backward(parameter);
       }
     }
     if (action.equals("lt")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.leftTurn(parameter);
       }
     }
     if (action.equals("rt")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.rightTurn(parameter);
       }
     }
-    for (TurtleModel turtle : currentTurtles){
+    for (Model turtle : currentTurtles){
       myController.update(turtle);
     }
     myIndex += 2;
@@ -123,36 +123,36 @@ public class CommandRunner {
   public void runType2(){
     String action = (myCommand[myIndex]);
     if (action.equals("pendown")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.penDown();
       }
     }
     if (action.equals("penup")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.penUp();
       }
     }
     if (action.equals("showt")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.show();
       }
     }
     if (action.equals("hidet")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.hide();
       }
     }
     if (action.equals("home")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         turtle.home();
       }
     }
     if (action.equals("stamp")){
-      for (TurtleModel turtle: currentTurtles){
+      for (Model turtle: currentTurtles){
         myController.stamp(turtle);
       }
     }
-    for (TurtleModel turtle : currentTurtles){
+    for (Model turtle : currentTurtles){
       myController.update(turtle);
     }
     myIndex += 1;
