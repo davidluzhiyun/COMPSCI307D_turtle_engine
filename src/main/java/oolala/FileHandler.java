@@ -124,11 +124,29 @@ public static void saveFile(List<String> history){
 }
 
 
-public static void loadFileRedux(){
-  FileChooser fileChooser = new FileChooser();
-  FileChooser.ExtensionFilter fileExtension = new FileChooser.ExtensionFilter("select your music file (*.mp3)", "*.mp3");
-  fileChooser.getExtensionFilters().add(fileExtension);
-  File mp3File= fileChooser.showOpenDialog(new Stage());
+public static List<String> loadFileRedux(){
+  List<String> commands = new ArrayList<String>();
+
+  try {
+    FileChooser fileChooser = new FileChooser();
+    FileChooser.ExtensionFilter fileExtension = new FileChooser.ExtensionFilter(
+        "select your text file (*.txt)", "*.txt");
+    fileChooser.getExtensionFilters().add(fileExtension);
+    File txtFile = fileChooser.showOpenDialog(new Stage());
+    FileReader fileReader = new FileReader(txtFile);
+    BufferedReader bufferedReader = new BufferedReader(fileReader);
+    String str;
+    while ((str = bufferedReader.readLine()) != null){
+      commands.add(str);
+    }
+
+  }
+  catch (Exception e){
+    System.out.println(e.getMessage());
+  }
+
+return commands;
+
 }
 
 
