@@ -18,12 +18,18 @@ Once you do that, you can probably have the parsing follow a strict pattern for 
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class FileHandler   {
 
@@ -33,73 +39,51 @@ static String[] nonNumCommands ={"pendown","penup","showt","hidet","home","stamp
 
 
 
+public static void saveFile(List<String> history){
 
-
-
-
-  public static void readFile() throws IOException {
-ArrayList<String> nonNumCommands2 = (ArrayList<String>) Arrays.asList(nonNumCommands);
-ArrayList<String> numCommands2 = (ArrayList<String>) Arrays.asList(numCommands);
-    String file = Files.readString(Path.of("src/main/resources/test.txt"));
-    String[] newFile = file.split("\\s+");
-    for (int i = 0; i < newFile.length-1; i++) {
-      String current = newFile[i];
-      if(numCommands2.contains(current)){
-        try{
-              int test = Integer.parseInt(newFile[i+1]);
-              numCommandsSwitch(current,test);
-        }
-        catch(NumberFormatException e){
-            //Error Handling for BadFIle goes here
-        }
-      }
-      else if (nonNumCommands2.contains(current)){
-        nonNumCommandsSwitch(current);
-      }
-
-      else{
-        //Error Handling for Bad File goes Here
-      }
-
-
-    }
-
-
-  }
-
-public static void numCommandsSwitch(String x, int y){
-    switch(x){
-
-
-
-    }
+ try {
+   FileWriter fileWriter = new FileWriter("output.txt");
+   BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+   for(String x:history){
+     bufferedWriter.write(x);
+     bufferedWriter.write("\n");
+   }
+   bufferedWriter.close();
+ }
+ catch (IOException e){
+    System.out.println("Buffered reader failed and "+e.getMessage());
+ }
 }
 
-public static void nonNumCommandsSwitch(String x){
-  switch(x){
 
-  }
+public static List<String> loadFileRedux(){
+  List<String> commands = new ArrayList<String>();
 
-
-
-}
-
-public static void newReadFile(){
-    CommandRunner commandRunner = new CommandRunner(null);
-  BufferedReader reader;
   try {
-    reader = new BufferedReader(new FileReader("src/main/resources/test.txt"));
-    String line = reader.readLine();
-    while (line != null) {
-    commandRunner.loadCommand(line);
-    commandRunner.run(line);
-      line = reader.readLine();
+    FileChooser fileChooser = new FileChooser();
+    FileChooser.ExtensionFilter fileExtension = new FileChooser.ExtensionFilter(
+        "select your text file (*.txt)", "*.txt");
+    fileChooser.getExtensionFilters().add(fileExtension);
+    File txtFile = fileChooser.showOpenDialog(new Stage());
+    FileReader fileReader = new FileReader(txtFile);
+    BufferedReader bufferedReader = new BufferedReader(fileReader);
+    String str;
+    while ((str = bufferedReader.readLine()) != null){
+      commands.add(str);
     }
-    reader.close();
-  } catch (IOException e) {
-    e.printStackTrace();
+
   }
+  catch (Exception e){
+    System.out.println(e.getMessage());
+  }
+
+return commands;
+
 }
+
+
+
+
 }
 
 

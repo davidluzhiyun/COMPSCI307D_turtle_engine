@@ -1,5 +1,7 @@
 package oolala;
 
+import java.io.File;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -26,6 +28,9 @@ public class TurtleCommandView {
   public static final int FIELD_WIDTH = 40;
   public static final String BUTTON_NAME_RUN = "Run";
   public static final String BUTTON_NAME_CLEAR = "Clear";
+
+  public static final String BUTTON_NAME_SAVE = "Save";
+  public static final String BUTTON_NAME_LOAD = "Load";
 
   //Class variables
   private TextField mySingleLineInput;
@@ -106,13 +111,38 @@ public class TurtleCommandView {
     mySingleLineInput = makeInputField(FIELD_WIDTH, event -> handleKeyInput(event.getCode()));
     Button runButton = makeButton(BUTTON_NAME_RUN, event -> run(mySingleLineInput.getText()));
     Button clearButton = makeButton(BUTTON_NAME_CLEAR, event -> clear());
+    Button saveButton = makeButton(BUTTON_NAME_SAVE, event -> FileHandler.saveFile(myModel.getMyHistory()));
+    Button loadButton = makeButton(BUTTON_NAME_LOAD, event -> loadFile());
+
     result.getChildren().add(clearButton);
     result.getChildren().add(mySingleLineInput);
     result.getChildren().add(runButton);
+    result.getChildren().add(saveButton);
+    result.getChildren().add(loadButton);
     return result;
   }
 
   public String getMyErrorMessage() {
     return myErrorMessage;
   }
+
+public void loadFile(){
+   List<String> commands = FileHandler.loadFileRedux();
+    for(String x: commands){
+      run(x);
+    }
 }
+
+
+
+
+
+
+}
+
+
+
+
+
+
+

@@ -83,7 +83,7 @@ public class Main extends Application {
   public void startApp1(){
     mainStage.setScene(getTurtleScene());
     try{
-      FileHandler.newReadFile();
+      //FileHandler.newReadFile();
     }
     catch (Exception e){
       System.out.println("Oh crap"+e.getMessage());
