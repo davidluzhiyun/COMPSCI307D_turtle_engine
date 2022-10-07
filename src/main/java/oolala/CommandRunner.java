@@ -2,26 +2,17 @@
 
 
 
-
-
-
-
-
 package oolala;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
 
 public class CommandRunner {
-  public static String[] TYPE1_TOKENS = {"fd", "bk", "lt", "rt"};
-  public static String[] TYPE2_TOKENS = {"pendown", "penup", "showt", "hidet", "home", "stamp"};
   private List<TurtleModel> currentTurtles;
   private String[] myCommand;
-  private int[] tokenTypes;
   private int myIndex;
   private String myError;
   private TurtleController myController;
@@ -43,10 +34,6 @@ public class CommandRunner {
   public void loadCommand(String command){
     myError = null;
     myCommand = command.split("\\s+");
-    tokenTypes = new int[myCommand.length];
-    for (int i = 0; i < tokenTypes.length; i++){
-      tokenTypes[i] = typeCheck(myCommand[i]);
-    }
     myIndex = 0;
   }
 
@@ -201,6 +188,26 @@ public class CommandRunner {
       }
     }
     return myError;
+  }
+
+  public String[] getMyCommand() {
+    return myCommand;
+  }
+
+  public int getMyIndex() {
+    return myIndex;
+  }
+
+  public List<TurtleModel> getCurrentTurtles() {
+    return currentTurtles;
+  }
+
+  public void setMyIndex(int myIndex) {
+    this.myIndex = myIndex;
+  }
+
+  public TurtleController getMyController() {
+    return myController;
   }
 
   /**

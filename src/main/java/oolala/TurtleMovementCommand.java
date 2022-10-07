@@ -1,10 +1,17 @@
 package oolala;
 
+/**
+ * Abstract class for common steps of commands like "fd", "bk", "lt", "rt"
+ */
 public abstract class TurtleMovementCommand extends TurtleCommand {
 
   public TurtleMovementCommand(CommandRunner model){
     super(model);
   }
+
+  /**
+   * Parses parameter, set error message and do nothing when problem occurs
+   */
   protected int parseParameter() {
     try {
       CommandRunner model = getMyModel();
