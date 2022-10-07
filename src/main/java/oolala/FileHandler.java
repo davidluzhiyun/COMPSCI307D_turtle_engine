@@ -18,7 +18,9 @@ Once you do that, you can probably have the parsing follow a strict pattern for 
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -104,6 +106,18 @@ public static void newReadFile(){
 
 public static void saveFile(List<String> history){
 
+ try {
+   FileWriter fileWriter = new FileWriter("output.txt");
+   BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+   for(String x:history){
+     bufferedWriter.write(x);
+     bufferedWriter.write("\n");
+   }
+   bufferedWriter.close();
+ }
+ catch (IOException e){
+    System.out.println("Buffered reader failed and "+e.getMessage());
+ }
 }
 
 

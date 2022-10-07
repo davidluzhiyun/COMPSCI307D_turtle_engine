@@ -1,0 +1,1 @@
+fd 500 clearbd 50bk 50
