@@ -112,7 +112,7 @@ public class TurtleCommandView {
     Button runButton = makeButton(BUTTON_NAME_RUN, event -> run(mySingleLineInput.getText()));
     Button clearButton = makeButton(BUTTON_NAME_CLEAR, event -> clear());
     Button saveButton = makeButton(BUTTON_NAME_SAVE, event -> FileHandler.saveFile(myModel.getMyHistory()));
-    Button loadButton = makeButton(BUTTON_NAME_LOAD, event -> FileHandler.loadFileRedux());
+    Button loadButton = makeButton(BUTTON_NAME_LOAD, event -> loadFile());
 
     result.getChildren().add(clearButton);
     result.getChildren().add(mySingleLineInput);
@@ -126,7 +126,12 @@ public class TurtleCommandView {
     return myErrorMessage;
   }
 
-
+public void loadFile(){
+   List<String> commands = FileHandler.loadFileRedux();
+    for(String x: commands){
+      run(x);
+    }
+}
 
 
 
