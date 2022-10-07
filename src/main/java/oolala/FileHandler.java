@@ -19,6 +19,7 @@ Once you do that, you can probably have the parsing follow a strict pattern for 
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,6 +28,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class FileHandler   {
 
@@ -118,6 +121,14 @@ public static void saveFile(List<String> history){
  catch (IOException e){
     System.out.println("Buffered reader failed and "+e.getMessage());
  }
+}
+
+
+public static void loadFileRedux(){
+  FileChooser fileChooser = new FileChooser();
+  FileChooser.ExtensionFilter fileExtension = new FileChooser.ExtensionFilter("select your music file (*.mp3)", "*.mp3");
+  fileChooser.getExtensionFilters().add(fileExtension);
+  File mp3File= fileChooser.showOpenDialog(new Stage());
 }
 
 

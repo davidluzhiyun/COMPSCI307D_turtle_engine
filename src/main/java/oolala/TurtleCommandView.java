@@ -123,7 +123,9 @@ public class TurtleCommandView {
     return myErrorMessage;
   }
 
-
+public void loadFile(){
+FileHandler.loadFileRedux();
+}
 
 
 
