@@ -93,5 +93,9 @@ public class TurtleCommandHistoryModel {
     }
   }
 
+  public List<String> getMyHistory(){
+    return myHistory;
+  }
+
 
 }
