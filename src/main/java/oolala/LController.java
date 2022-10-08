@@ -27,7 +27,13 @@ public class LController {
   private GridPane topGrid;
   private static final String APP_CSS_PATH = "lView.css";
 
-
+  /**
+   * LController is the Controller for the L-System App
+   * It handles the creation of the initial model and view for the app, and initiates the UI and Command Box
+   *
+   * @author Andrew Demma
+   *
+   */
 
   public LController(){
     model = new Model();
@@ -39,6 +45,12 @@ public class LController {
   }
 
 
+  /**
+   * Creates the Scene which has the Turtle, text box, and buttons for control
+   * @param width is the width of the screen
+   * @param height is the height of the screen
+   * @return the created Scene
+   */
   public Scene makeScene(int width, int height){
     root = new BorderPane();
     root.setCenter(makeDisplay());
@@ -63,6 +75,9 @@ public class LController {
     return lScene;
   }
 
+/**
+* changes the background through created color list
+*/
   private void changeBackgroundColor() {
     colorIndex++;
     colorIndex %= colorList.size();

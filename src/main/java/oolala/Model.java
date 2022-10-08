@@ -10,6 +10,13 @@ public class Model {
   private int angle;
   protected boolean draw = true;
   private boolean show = true;
+  /**
+   * Model is the data structure which holds the position and properties of the cursor for the system
+   *
+   *
+   * @author Andrew Demma
+   *
+   */
 
   public Model(){
     this("default");
@@ -19,6 +26,10 @@ public class Model {
     this.home();
   }
 
+/**
+* Turns the model to the right at the specified number of degrees
+ * @param angleChange the angle, in degrees, that the model will turn to the right
+*/
   public void rightTurn(int angleChange){
     angle -= angleChange;
     if(angle < 0){
@@ -27,6 +38,11 @@ public class Model {
     angle %= 360;
   }
 
+/**
+* Turns the model to the right at the specified number of degrees
+ * Does exactly what right turn does, but opposite, hence the negative call to rightTurn
+ * @param angleChange the angle, in degrees, that the model will turn to the left
+*/
   public void leftTurn(int angleChange){
     this.rightTurn(-1*angleChange);
   }
@@ -48,6 +64,9 @@ public class Model {
     return y;
   }
 
+/**
+* returns the model back to it's starting position
+*/
   public void home(){
     x = (float) SIZE/2;
     y = (float) SIZE/2;
@@ -80,6 +99,10 @@ public class Model {
   public boolean isShow(){
     return show;
   }
+/**
+* getName returns the name of the model. This is used when moving specific turtles in the view, and the name is the key to know which turtle it is moving
+ * @return the name of the model
+*/
   public String getName(){
     return name;
   }

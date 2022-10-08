@@ -36,6 +36,4 @@
 
 #### Other Features not yet Done
 
-### Design stuff 9/22
 
-Have button on bottom that switches between command line mode and Text editor mode

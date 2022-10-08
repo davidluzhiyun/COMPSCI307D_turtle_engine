@@ -2,7 +2,6 @@ package oolala;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -24,7 +23,13 @@ public class TurtleController {
   Group totalGroup;
   private BorderPane root;
   private static final String APP_CSS_PATH = "turtleView.css";
-
+  /**
+   * TurtleController is the Controller for the Logo App
+   * It handles the creation of the initial model and view for the app, and initiates the UI and Command Runner
+   *
+   * @author Andrew Demma
+   *
+   */
   public TurtleController(){
     String firstTurtleName = "first";
     model = new Model(firstTurtleName);
@@ -37,20 +42,17 @@ public class TurtleController {
     allViews = new Hashtable<>();
     allViews.put(firstTurtleName, view);
   }
+/**
+* Creates the Scene which has the Turtle, text box, and buttons for control
+ * @param width is the width of the screen
+ * @param height is the height of the screen
+ * @return the created Scene
+*/
   public Scene makeScene(int width, int height){
     root = new BorderPane();
     root.setCenter(makeTurtleDisplay());
     Scene turtleScene = new Scene(root, width, height);
     turtleScene.getStylesheets().add(getClass().getResource(DEFAULT_RESOURCE_PATH+DEFAULT_CSS_PATH+APP_CSS_PATH).toExternalForm());
-    HBox topBar = new HBox(15);
-
-    Button button = new Button("Change Background Color");
-
-
-    topBar.getChildren().addAll(button);
-
-
-    root.setTop(topBar);
     TurtleCommandView InputView = new TurtleCommandView(this);
     HBox box = (HBox) InputView.makeInputPanel();
     root.setBottom(box);
@@ -76,7 +78,7 @@ public class TurtleController {
   }
   public void stamp(Model turtle){
     View view = allViews.get(turtle.getName());
-    view.stamp(turtle);
+    view.stamp();
     showError();
   }
   public void createView(Model turtle){
