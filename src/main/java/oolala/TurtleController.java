@@ -21,7 +21,8 @@ public class TurtleController {
 
   TurtleModel model;
   ArrayList<TurtleModel> turtleModels;
-  Dictionary<String, TurtleModel> allTurtles;
+  Hashtable<String, TurtleModel> allTurtles;
+  // TurtleTellCommand requires the contains method of Hashtable
   Dictionary<String, TurtleView> allModels;
   TurtleCommandView commandView;
   Group totalGroup;
@@ -71,7 +72,7 @@ public class TurtleController {
     return turtleModels.get(0);
   }
 
-  public Dictionary getTurtleDictionary(){
+  public Hashtable<String, TurtleModel> getTurtleDictionary(){
     return allTurtles;
   }
 
