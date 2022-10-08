@@ -5,64 +5,61 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import static oolala.Main.DEFAULT_CSS_PATH;
+import static oolala.Main.DEFAULT_RESOURCE_PATH;
+
 public class TurtleController {
 
   Model model;
   ArrayList<Model> turtleModels;
   Hashtable<String, Model> allTurtles;
-  // TurtleTellCommand requires the contains method of Hashtable
-
-  Dictionary<String, TurtleView> allModels;
+  Dictionary<String, View> allViews;
   TurtleCommandView commandView;
   Group totalGroup;
   private BorderPane root;
+  private static final String APP_CSS_PATH = "turtleView.css";
 
   public TurtleController(){
-    model = new Model("first");
+    String firstTurtleName = "first";
+    model = new Model(firstTurtleName);
     turtleModels = new ArrayList<>();
     turtleModels.add(model);
-    TurtleView view = new TurtleView();
+    View view = new View();
     commandView = new TurtleCommandView(this);
     allTurtles = new Hashtable<>();
-    allTurtles.put("first", turtleModels.get(0));
-    allModels = new Hashtable<>();
-    allModels.put("first", view);
+    allTurtles.put(firstTurtleName, turtleModels.get(0));
+    allViews = new Hashtable<>();
+    allViews.put(firstTurtleName, view);
   }
+  public Scene makeScene(int width, int height){
+    root = new BorderPane();
+    root.setCenter(makeTurtleDisplay());
+    Scene turtleScene = new Scene(root, width, height);
+    turtleScene.getStylesheets().add(getClass().getResource(DEFAULT_RESOURCE_PATH+DEFAULT_CSS_PATH+APP_CSS_PATH).toExternalForm());
+    HBox topBar = new HBox(15);
+
+    Button button = new Button("Change Background Color");
 
 
-    public Scene makeScene(int width, int height){
-        root = new BorderPane();
-        root.setCenter(makeTurtleDisplay());
-        HBox topBar = new HBox(15);
-
-        Text text = new Text("TurtleTime");
-        text.setFont(new Font(20));
-
-        Button button = new Button("Change Color");
-        //button.setOnMouseClicked(e->view.changeContrast(-1.0));
+    topBar.getChildren().addAll(button);
 
 
-        topBar.getChildren().addAll(text,button);
-
-
-        root.setTop(topBar);
-        TurtleCommandView InputView = new TurtleCommandView(this);
-        HBox box = (HBox) InputView.makeInputPanel();
-        root.setBottom(box);
-
-    return new Scene(root, width, height);
+    root.setTop(topBar);
+    TurtleCommandView InputView = new TurtleCommandView(this);
+    HBox box = (HBox) InputView.makeInputPanel();
+    root.setBottom(box);
+    return turtleScene;
   }
 
   private Group makeTurtleDisplay(){
-    Group turtleGroup = allModels.get("first").getGroup();
-    return new Group(turtleGroup);
+    totalGroup = allViews.get("first").getGroup();
+    return new Group(totalGroup);
   }
   public Model getInitialTurtle(){
     return turtleModels.get(0);
@@ -73,18 +70,18 @@ public class TurtleController {
   }
 
   public void update(Model turtle){
-    TurtleView view = allModels.get(turtle.getName());
+    View view = allViews.get(turtle.getName());
     view.update(turtle);
     showError();
   }
   public void stamp(Model turtle){
-    TurtleView view = allModels.get(turtle.getName());
+    View view = allViews.get(turtle.getName());
     view.stamp(turtle);
     showError();
   }
   public void createView(Model turtle){
-    TurtleView newView = new TurtleView();
-    allModels.put(turtle.getName(), newView);
+    View newView = new View();
+    allViews.put(turtle.getName(), newView);
     totalGroup.getChildren().add(newView.getGroup());
   }
 

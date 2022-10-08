@@ -22,6 +22,10 @@ public class View {
     createGroup();
   }
 
+/**
+*
+ * @param model is the model that the view will be basing its changes off of
+*/
   public void update(Model model){
     cursor.visibleProperty().set(model.isShow());
 
@@ -39,11 +43,19 @@ public class View {
     cursor.setRotate(90 - model.getAngle());
   }
 
+  public void stamp(Model model){
+    ImageView newStamp = new ImageView(new Image(TURTLE_IMAGE));
+    newStamp.setX(cursor.getX());
+    newStamp.setY(cursor.getY());
+    newStamp.setRotate(90 - model.getAngle());
+    stamps.getChildren().add(newStamp);
+  }
+
 
   private void createGroup(){
     lineGroup = new Group();
     stamps = new Group();
-    totalGroup = new Group(cursor, lineGroup);
+    totalGroup = new Group(cursor, lineGroup, stamps);
   }
   public Group getGroup() {
     return totalGroup;
