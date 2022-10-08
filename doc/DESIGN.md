@@ -31,6 +31,7 @@
 ## Design goals
 
 #### What Features are Easy to Add
+* Drawing a line when a model moved was easy to implement
 
 
 ## High-level Design
@@ -55,10 +56,9 @@
 ## New Features HowTo
 
 #### Easy to Add Features
-Drawing a line when a model moved was easy to implement
 
 #### Other Features not yet Done
 * Adding Static buttons to the top of the apps for changing background, color of turtle
 * Ability to see names and the coordinates of present turtles
-* 
+* the new commands from refactoring
 
