@@ -1,239 +1,157 @@
-
-
-
-
 package oolala;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Hashtable;
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 
 public class CommandRunner {
+  private static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
+  private static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Errors";
+  private static final String DEFAULT_COMMANDS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Commands";
   private List<TurtleModel> currentTurtles;
   private String[] myCommand;
   private int myIndex;
   private String myError;
   private TurtleController myController;
+  private ResourceBundle myErrorResources;
+  private ResourceBundle myCommandResources;
 
-  public CommandRunner(TurtleController controller){
-    myController = controller;
-    currentTurtles = new ArrayList<>();
-    // inputs first turtle automatically
-    currentTurtles.add(myController.getInitialTurtle());
-    myCommand = null;
-    myIndex = 0;
-    myError = null;
+  public CommandRunner(TurtleController controller) {
+    try {
+      myController = controller;
+      currentTurtles = new ArrayList<>();
+      // inputs first turtle automatically
+      currentTurtles.add(myController.getInitialTurtle());
+      myCommand = null;
+      myIndex = 0;
+      myError = null;
+      myErrorResources = ResourceBundle.getBundle(DEFAULT_ERRORS_RESOURCE_PACKAGE);
+      myCommandResources = ResourceBundle.getBundle(DEFAULT_COMMANDS_RESOURCE_PACKAGE);
+    }
+    catch (NullPointerException e){
+      throw new NullPointerException("Check if the controller is null");
+    }
+
   }
 
   /**
-   *  Take a command, split it into tokens and label the types
+   *  Take a command, split it into tokens
    *  Store result in class variables
    */
-  public void loadCommand(String command){
-    myError = null;
-    myCommand = command.split("\\s+");
-    myIndex = 0;
+  public void loadCommand(String command) throws NullPointerException{
+    try {
+      myError = null;
+      myCommand = command.toLowerCase().split("\\s+");
+      myIndex = 0;
+    }
+    catch (NullPointerException e){
+      loadCommand("");
+    }
   }
 
   /**
    * return an error message for current index
    */
   public void throwUnknownToken(){
-    myError = "Don't know how to \"%s\"".formatted(myCommand[myIndex]);
+    myError = myErrorResources.getString("UnknownToken").formatted(myCommand[myIndex]);
   }
 
   public void throwUnexpectedEnd(){
-    myError = "Unexpected end of instruction";
+    myError = myErrorResources.getString("UnexpectedEnd");
   }
 
   /**
-   * Run actions that require two tokens
+   * Method for checking if token matches a type of command
    */
-  public void runType1(){
-    if (errorHandleType1()){
-      myIndex += 2;
-      return;
+  public boolean matches(String token,String key) throws NullPointerException, MissingResourceException {
+    try {
+      return Arrays.asList(myCommandResources.getStringArray(key)).contains(token);
+    } catch (NullPointerException e) {
+      throw new NullPointerException("Make sure arguments aren't null");
     }
-    int parameter = Integer.parseInt(myCommand[myIndex+1]);
-    String action = (myCommand[myIndex]);
-    if (action.equals("fd")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.forward(parameter);
-      }
+    catch (MissingResourceException e) {
+      throw e;
     }
-    if (action.equals("bk")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.backward(parameter);
-      }
-    }
-    if (action.equals("lt")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.leftTurn(parameter);
-      }
-    }
-    if (action.equals("rt")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.rightTurn(parameter);
-      }
-    }
-    for (TurtleModel turtle : currentTurtles){
-      myController.update(turtle);
-    }
-    myIndex += 2;
   }
 
-  /**
-   * Handle error for actions that require two tokens
-   */
-  public boolean errorHandleType1(){
-    if(myIndex + 1 >= tokenTypes.length){
-      throwUnexpectedEnd();
-    }
-    else{
-      int parameterType = tokenTypes[myIndex + 1];
-      if (parameterType == 3){
-        return false;
-      }
-      if (parameterType == 5){
-        throwUnknownToken();
-        return true;
-      }
-    }
-    return true;
-  }
-
-  /**
-   * Run actions that require one token
-   */
-  public void runType2(){
-    String action = (myCommand[myIndex]);
-    if (action.equals("pendown")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.penDown();
-      }
-    }
-    if (action.equals("penup")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.penUp();
-      }
-    }
-    if (action.equals("showt")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.show();
-      }
-    }
-    if (action.equals("hidet")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.hide();
-      }
-    }
-    if (action.equals("home")){
-      for (TurtleModel turtle: currentTurtles){
-        turtle.home();
-      }
-    }
-    if (action.equals("stamp")){
-      for (TurtleModel turtle: currentTurtles){
-        myController.stamp(turtle);
-      }
-    }
-    for (TurtleModel turtle : currentTurtles){
-      myController.update(turtle);
-    }
-    myIndex += 1;
-  }
-
-  /**
-   * Runs tell
-   * name can't be an action command
-   * stop taking arguments when an action command is met
-   */
-  public void runTell(){
-    currentTurtles = new ArrayList<>();
-    myIndex += 1;
-    while ((myIndex < myCommand.length) && ((tokenTypes[myIndex] == 5) || (tokenTypes[myIndex] == 3))){
-      String name = myCommand[myIndex];
-      if(((Hashtable)myController.getTurtleDictionary()).containsKey(name)){
-        currentTurtles.add((TurtleModel) myController.getTurtleDictionary().get(name));
-      }
-      else {
-        TurtleModel newTurtle = new TurtleModel(name);
-        myController.getTurtleDictionary().put(name,newTurtle);
-        currentTurtles.add(newTurtle);
-        myController.createView(newTurtle);
-      }
-      myIndex += 1;
-    }
-  }
   /**
    * The overall running command, returns error message.
    */
   public String run(String command){
-    loadCommand(command);
-    while ((myError == null) && (myIndex < myCommand.length)){
-      if (tokenTypes[myIndex] == 1){
-        runType1();
+      loadCommand(command);
+      String action = (myCommand[myIndex]);
+      TurtleCommand myTurtleCommand;
+      while ((myError == null) && (myIndex < myCommand.length)) {
+        if (matches(action, "TurtleForward")) {
+          myTurtleCommand = new TurtleForwardCommand(this);
+        }
+        else if (matches(action, "TurtleBackward")) {
+          myTurtleCommand = new TurtleBackwardCommand(this);
+        }
+        else if (matches(action, "TurtleLeftTurn")) {
+          myTurtleCommand = new TurtleLeftTurnCommand(this);
+        }
+        else if (matches(action, "TurtleRightTurn")) {
+          myTurtleCommand = new TurtleRightTurnCommand(this);
+        }
+        else if (matches(action, "TurtlePenDown")) {
+          myTurtleCommand = new TurtlePenDownCommand(this);
+        }
+        else if (matches(action, "TurtlePenUp")) {
+          myTurtleCommand = new TurtlePenUpCommand(this);
+        }
+        else if (matches(action, "TurtleShow")) {
+          myTurtleCommand = new TurtleShowCommand(this);
+        }
+        else if (matches(action, "TurtleHide")) {
+          myTurtleCommand = new TurtleHideCommand(this);
+        }
+        else if (matches(action, "TurtleHome")) {
+          myTurtleCommand = new TurtleHomeCommand(this);
+        }
+        else if (matches(action, "TurtleStamp")) {
+          myTurtleCommand = new TurtleStampCommand(this);
+        }
+        else if (matches(action, "TurtleTell")) {
+          myTurtleCommand = new TurtleTellCommand(this);
+        }
+        else {
+          throwUnknownToken();
+          break;
+        }
+        myTurtleCommand.execute();
+        for (TurtleModel turtle : currentTurtles){
+          myController.update(turtle);
+        }
       }
-      else if (tokenTypes[myIndex] == 2) {
-        runType2();
+      return myError;
+  }
+
+      public String[] getMyCommand () {
+        return myCommand;
       }
-      else if (tokenTypes[myIndex] == 4) {
-        runTell();
+
+      public int getMyIndex () {
+        return myIndex;
       }
-      else {
-        throwUnknownToken();
-        break;
+
+      public List<TurtleModel> getCurrentTurtles () {
+        return currentTurtles;
+      }
+
+  public void setCurrentTurtles(List<TurtleModel> currentTurtles) {
+    this.currentTurtles = currentTurtles;
+  }
+
+  public void setMyIndex ( int myIndex){
+        this.myIndex = myIndex;
+      }
+
+      public TurtleController getMyController () {
+        return myController;
       }
     }
-    return myError;
-  }
 
-  public String[] getMyCommand() {
-    return myCommand;
-  }
-
-  public int getMyIndex() {
-    return myIndex;
-  }
-
-  public List<TurtleModel> getCurrentTurtles() {
-    return currentTurtles;
-  }
-
-  public void setMyIndex(int myIndex) {
-    this.myIndex = myIndex;
-  }
-
-  public TurtleController getMyController() {
-    return myController;
-  }
-
-  /**
-   * Auxiliary method for checking the type of token
-   * 1 and 2 listed above
-   * 3 for numbers
-   * 4 for tell
-   * 5 for other
-   * Inspired by https://www.digitalocean.com/community/tutorials/java-array-contains-value
-   */
-  public static int typeCheck(String token){
-    if (Arrays.asList(TYPE1_TOKENS).contains(token)){
-      return 1;
-    }
-    else if (Arrays.asList(TYPE2_TOKENS).contains(token)){
-      return 2;
-    }
-    else if (token.matches("-?[0-9]+")){
-      return 3;
-    }
-    else if (token.equals("tell")) {
-      return 4;
-    }
-    else {
-      return 5;
-    }
-  }
-
-}
