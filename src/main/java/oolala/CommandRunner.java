@@ -68,7 +68,7 @@ public class CommandRunner {
    */
   public boolean matches(String token,String key) throws NullPointerException, MissingResourceException {
     try {
-      return Arrays.asList(myCommandResources.getStringArray(key)).contains(token);
+      return Arrays.asList(myCommandResources.getString(key).split(" ")).contains(token);
     } catch (NullPointerException e) {
       throw new NullPointerException("Make sure arguments aren't null");
     }
