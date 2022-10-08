@@ -20,7 +20,7 @@ public class TurtleTellCommand extends TurtleCommand{
       if (model.matches(name, "TurtleAllCommands")){
         break;
       }
-      else if (((Hashtable)(model.getMyController().getTurtleDictionary())).containsKey(name)) {
+      else if ((model.getMyController().getTurtleDictionary()).containsKey(name)) {
         currentTurtles.add((TurtleModel)model.getMyController().getTurtleDictionary().get(name));
       }
       else {
