@@ -8,9 +8,9 @@ import java.util.ResourceBundle;
 
 
 public class CommandRunner {
-  private static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
-  private static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Errors";
-  private static final String DEFAULT_COMMANDS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Commands";
+  public static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
+  public static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Errors";
+  public static final String DEFAULT_COMMANDS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Commands";
   private List<Model> currentTurtles;
   private String[] myCommand;
   private int myIndex;
