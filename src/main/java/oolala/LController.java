@@ -22,6 +22,7 @@ public class LController {
   private BorderPane root;
   private int colorIndex;
   List<Color> colorList;
+  private GridPane topGrid;
 
 
 
@@ -51,7 +52,7 @@ public class LController {
 
     topBar.getChildren().addAll(text,button);
 
-    GridPane topGrid = new GridPane();
+    topGrid = new GridPane();
     topGrid.add(button, 5, 0);
     root.setTop(topGrid);
     HBox box = (HBox) commandView.makeInputPanel();
@@ -85,7 +86,7 @@ public class LController {
       root.setTop(new Text(commandView.getMyErrorMessage()));
     }
     else {
-      root.setTop(null);
+      root.setTop(topGrid);
     }
   }
 }
