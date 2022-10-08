@@ -25,7 +25,8 @@ Attributions for others' work:
 
 Sea Turtle Pattern by ClipArtMax
 https://www.clipartmax.com/middle/m2i8A0d3A0d3G6H7_sea-turtle-pattern-outline-of-a-turtle/
-
+Checking if array contains string
+https://www.digitalocean.com/community/tutorials/java-array-contains-value
 
 ### Running the Program
 
