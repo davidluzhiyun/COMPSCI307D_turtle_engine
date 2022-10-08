@@ -15,6 +15,17 @@ public class View {
 
   protected final String TURTLE_IMAGE = "/images/turtle.png";
 
+  /**
+   * View is the cursor image itself along with any stamps for that particular turtle, and its lines
+   * lineGroup is all lines that this view has drawn
+   * stamps is all the stamps created by this turtle
+   * totalGroup is the combination of the actual turtle, its lines, and its stamps
+   *
+   * @author Andrew Demma
+   *
+   */
+
+
   public View(){
     cursor = new ImageView(new Image(TURTLE_IMAGE));
     cursor.setX((float) SIZE/2);
@@ -23,7 +34,8 @@ public class View {
   }
 
 /**
-*
+* changes the look of the turtle based on what the model describes the turtle as
+ * draws a line if the turtle moved and is in a penDown state
  * @param model is the model that the view will be basing its changes off of
 */
   public void update(Model model){
@@ -43,11 +55,14 @@ public class View {
     cursor.setRotate(90 - model.getAngle());
   }
 
-  public void stamp(Model model){
+/**
+* stamps where the cursor currently is
+*/
+  public void stamp(){
     ImageView newStamp = new ImageView(new Image(TURTLE_IMAGE));
     newStamp.setX(cursor.getX());
     newStamp.setY(cursor.getY());
-    newStamp.setRotate(90 - model.getAngle());
+    newStamp.setRotate(cursor.getRotate());
     stamps.getChildren().add(newStamp);
   }
 

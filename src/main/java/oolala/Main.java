@@ -3,9 +3,7 @@ package oolala;
 
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -32,7 +30,13 @@ public class Main extends Application {
   public static final String DEFAULT_RESOURCE_PATH = "/";
   public static final String DEFAULT_CSS_PATH = "view/";
   private static final String SPLASH_CSS_PATH = "/splashScreen.css";
-
+  /**
+   * Main starts the program and Initiates the splash screen and buttons to enter programs
+   *
+   *
+   * @author Nish Wangeno, Andrew Demma
+   *
+   */
 
   @Override
   public void start (Stage stage) throws IOException{
@@ -40,12 +44,12 @@ public class Main extends Application {
     mainStage.setScene(getSplashScreen());
     mainStage.setTitle("Turtle Time");
     mainStage.show();
-    animation = new Timeline();
-    animation.setCycleCount(Timeline.INDEFINITE);
-    animation.getKeyFrames().add(new KeyFrame(Duration.seconds((double) 1 / 60), e -> repeat()));
-    animation.play();
     }
 
+/**
+*
+ * @return the Scene with the splash text and buttons to enter apps
+*/
   public Scene getSplashScreen(){
     Pane root = new Pane();
     root.setId("root");
@@ -70,46 +74,28 @@ public class Main extends Application {
       play.getLayoutX();
       System.out.println(play.getWidth());
     }
-
     buttons.get(0).setOnMouseClicked(e->startLogo());
     buttons.get(1).setOnMouseClicked(e->startL());
-
-
 
     return splashScreen;
   }
 
-
+/**
+* Starts the Logo App by creating the controller, and getting the Scene of the Controller
+*/
   public void startLogo(){
-    Scene logoScene = getTurtleScene();
-    mainStage.setScene(logoScene);
-    try{
-      //FileHandler.newReadFile();
-    }
-    catch (Exception e){
-      System.out.println("Oh crap"+e.getMessage());
-    }
-
-  }
-  public void startL(){
-    mainStage.setScene(getLScene());
-  }
-
-  public Scene getTurtleScene(){
     TurtleController controller = new TurtleController();
     Scene turtleScene = controller.makeScene(mainWidth, mainHeight);
-    return turtleScene;
+    mainStage.setScene(turtleScene);
   }
-
-  public Scene getLScene(){
+/**
+* Starts the L-System App by creating the controller, and getting the Scene of the Controller
+*/
+  public void startL(){
     LController controller = new LController();
     Scene lScene = controller.makeScene(mainWidth, mainHeight);
-    return lScene;
+    mainStage.setScene(lScene);
   }
-
-  private void repeat(){
-
-    }
   public static void main (String[] args) {
         launch();
     }
