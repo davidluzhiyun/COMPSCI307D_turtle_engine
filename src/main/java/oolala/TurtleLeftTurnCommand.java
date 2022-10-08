@@ -9,7 +9,7 @@ public class TurtleLeftTurnCommand extends TurtleMovementCommand{
   public void execute() {
     int parameter = parseParameter();
     CommandRunner model = getMyModel();
-    for (TurtleModel turtle: model.getCurrentTurtles()){
+    for (Model turtle: model.getCurrentTurtles()){
       turtle.leftTurn(parameter);
     }
   }

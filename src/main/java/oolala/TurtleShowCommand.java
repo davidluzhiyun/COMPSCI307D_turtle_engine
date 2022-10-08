@@ -8,7 +8,7 @@ public class TurtleShowCommand extends TurtleCommand{
   @Override
   public void execute() {
     CommandRunner model = getMyModel();
-    for (TurtleModel turtle: model.getCurrentTurtles()){
+    for (Model turtle: model.getCurrentTurtles()){
       turtle.show();
     }
     model.setMyIndex(model.getMyIndex()+1);

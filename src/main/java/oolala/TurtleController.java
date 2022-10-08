@@ -1,40 +1,36 @@
 package oolala;
 
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
 
 public class TurtleController {
 
-  TurtleModel model;
-  ArrayList<TurtleModel> turtleModels;
-  Hashtable<String, TurtleModel> allTurtles;
+  Model model;
+  ArrayList<Model> turtleModels;
+  Hashtable<String, Model> allTurtles;
   // TurtleTellCommand requires the contains method of Hashtable
+
   Dictionary<String, TurtleView> allModels;
   TurtleCommandView commandView;
   Group totalGroup;
   private BorderPane root;
 
   public TurtleController(){
-    model = new TurtleModel("first");
+    model = new Model("first");
     turtleModels = new ArrayList<>();
     turtleModels.add(model);
     TurtleView view = new TurtleView();
     commandView = new TurtleCommandView(this);
-    allTurtles = new Hashtable<String, TurtleModel>();
+    allTurtles = new Hashtable<>();
     allTurtles.put("first", turtleModels.get(0));
     allModels = new Hashtable<>();
     allModels.put("first", view);
@@ -68,25 +64,25 @@ public class TurtleController {
     Group turtleGroup = allModels.get("first").getGroup();
     return new Group(turtleGroup);
   }
-  public TurtleModel getInitialTurtle(){
+  public Model getInitialTurtle(){
     return turtleModels.get(0);
   }
 
-  public Hashtable<String, TurtleModel> getTurtleDictionary(){
+  public Hashtable<String, Model> getTurtleDictionary(){
     return allTurtles;
   }
 
-  public void update(TurtleModel turtle){
+  public void update(Model turtle){
     TurtleView view = allModels.get(turtle.getName());
     view.update(turtle);
     showError();
   }
-  public void stamp(TurtleModel turtle){
+  public void stamp(Model turtle){
     TurtleView view = allModels.get(turtle.getName());
     view.stamp(turtle);
     showError();
   }
-  public void createView(TurtleModel turtle){
+  public void createView(Model turtle){
     TurtleView newView = new TurtleView();
     allModels.put(turtle.getName(), newView);
     totalGroup.getChildren().add(newView.getGroup());

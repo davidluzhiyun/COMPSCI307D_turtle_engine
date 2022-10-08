@@ -13,8 +13,8 @@ import java.util.*;
 
 public class LController {
 
-  LModel model;
-  LView view;
+  Model model;
+  View view;
 
   LCommandView commandView;
   Group totalGroup;
@@ -22,15 +22,17 @@ public class LController {
   private BorderPane root;
   private int colorIndex;
   List<Color> colorList;
+  private GridPane topGrid;
 
 
 
   public LController(){
-    model = new LModel();
-    view = new LView();
+    model = new Model();
+    model.hide();
+    view = new View();
+    view.update(model);
     colorList = Arrays.asList(Color.RED, Color.BLUEVIOLET, Color.LAWNGREEN, Color.GRAY, Color.AQUAMARINE);
     commandView = new LCommandView(this);
-
   }
 
 
@@ -42,7 +44,7 @@ public class LController {
     Text text = new Text("L-Time");
     text.setFont(new Font(20));
 
-    Button button = new Button("Change Color");
+    Button button = new Button("Change Background Color");
     Background background = new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY));
     root.setBackground(background);
     button.setOnMouseClicked(e->changeBackgroundColor());
@@ -50,7 +52,7 @@ public class LController {
 
     topBar.getChildren().addAll(text,button);
 
-    GridPane topGrid = new GridPane();
+    topGrid = new GridPane();
     topGrid.add(button, 5, 0);
     root.setTop(topGrid);
     HBox box = (HBox) commandView.makeInputPanel();
@@ -71,7 +73,7 @@ public class LController {
     return view.getGroup();
   }
 
-  public LModel getModel () {
+  public Model getModel () {
     return model;
   }
 
@@ -84,7 +86,7 @@ public class LController {
       root.setTop(new Text(commandView.getMyErrorMessage()));
     }
     else {
-      root.setTop(null);
+      root.setTop(topGrid);
     }
   }
 }

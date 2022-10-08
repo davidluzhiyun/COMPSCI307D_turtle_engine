@@ -10,7 +10,7 @@ public class LCommandRunner {
   private int myIndex;
   private String myError;
   private LController myController;
-  private LModel cursor;
+  private Model cursor;
 
   public LCommandRunner(LController controller){
     myController = controller;
@@ -32,6 +32,7 @@ public class LCommandRunner {
       tokenTypes[i] = typeCheck(myCommand[i]);
     }
     myIndex = 0;
+    myController.getModel().show();
   }
 
   /**

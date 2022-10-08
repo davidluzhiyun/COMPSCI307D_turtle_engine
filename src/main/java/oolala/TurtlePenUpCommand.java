@@ -8,7 +8,7 @@ public class TurtlePenUpCommand extends TurtleCommand{
   @Override
   public void execute() {
     CommandRunner model = getMyModel();
-    for (TurtleModel turtle: model.getCurrentTurtles()){
+    for (Model turtle: model.getCurrentTurtles()){
       turtle.penUp();
     }
     model.setMyIndex(model.getMyIndex()+1);

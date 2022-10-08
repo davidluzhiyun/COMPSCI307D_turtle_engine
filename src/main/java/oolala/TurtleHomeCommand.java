@@ -8,7 +8,7 @@ public class TurtleHomeCommand extends TurtleCommand{
   @Override
   public void execute() {
     CommandRunner model = getMyModel();
-    for (TurtleModel turtle : model.getCurrentTurtles()) {
+    for (Model turtle : model.getCurrentTurtles()) {
       turtle.home();
     }
     model.setMyIndex(model.getMyIndex() + 1);

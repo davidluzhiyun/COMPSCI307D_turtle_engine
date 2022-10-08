@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main extends Application {
  Stage mainStage;
@@ -56,11 +58,12 @@ public class Main extends Application {
     title.setX(285);
     title.setY(200);
     title.setFill(Color.RED);
-    ArrayList<Button> buttons = new ArrayList<Button>();
+    List<Button> buttons = new ArrayList<>();
     Group gButtons = new Group();
     gButtons.getChildren().add(title);
-    for(int i =1;i<=3;i++){
-      Button play = new Button("play App "+i);
+    List<String> apps = Arrays.asList("Turtle", "L-System");
+    for(int i =0;i<=1;i++){
+      Button play = new Button(apps.get(i));
       play.setFont(new Font(20));
       play.setTextAlignment(TextAlignment.CENTER);
       Font font = Font.font("Verdana", FontWeight.LIGHT, 25);
@@ -73,7 +76,6 @@ public class Main extends Application {
 
     buttons.get(0).setOnMouseClicked(e->startApp1());
     buttons.get(1).setOnMouseClicked(e->startApp2());
-    buttons.get(2).setOnMouseClicked(e->startApp3());
 
 
     return new Scene(gButtons, mainWidth, mainHeight,Color.BLACK);

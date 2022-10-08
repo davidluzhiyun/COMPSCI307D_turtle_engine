@@ -9,7 +9,7 @@ public class TurtleStampCommand extends TurtleCommand{
   public void execute() {
     CommandRunner model = getMyModel();
     TurtleController controller = model.getMyController();
-    for (TurtleModel turtle: model.getCurrentTurtles()){
+    for (Model turtle: model.getCurrentTurtles()){
       controller.stamp(turtle);
     }
     model.setMyIndex(model.getMyIndex()+1);

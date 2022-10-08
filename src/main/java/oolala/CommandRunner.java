@@ -11,7 +11,7 @@ public class CommandRunner {
   private static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
   private static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Errors";
   private static final String DEFAULT_COMMANDS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "Commands";
-  private List<TurtleModel> currentTurtles;
+  private List<Model> currentTurtles;
   private String[] myCommand;
   private int myIndex;
   private String myError;
@@ -123,7 +123,7 @@ public class CommandRunner {
           break;
         }
         myTurtleCommand.execute();
-        for (TurtleModel turtle : currentTurtles){
+        for (Model turtle : currentTurtles){
           myController.update(turtle);
         }
       }
@@ -138,15 +138,15 @@ public class CommandRunner {
         return myIndex;
       }
 
-      public List<TurtleModel> getCurrentTurtles () {
+      public List<Model> getCurrentTurtles () {
         return currentTurtles;
       }
 
-  public void setCurrentTurtles(List<TurtleModel> currentTurtles) {
+  public void setCurrentTurtles(List<Model> currentTurtles) {
     this.currentTurtles = currentTurtles;
   }
 
-  public void setMyIndex ( int myIndex){
+  public void setMyIndex (int myIndex){
         this.myIndex = myIndex;
       }
 
